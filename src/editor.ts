@@ -14,43 +14,43 @@ class Concatenator<T> {
     }
 }
 
-var stringConcat = new Concatenator<string>();
-var numberConcat = new Concatenator<number>();
+const stringConcat = new Concatenator<string>();
+const numberConcat = new Concatenator<number>();
 
-let concatResult = stringConcat.concatenateArray(
+const concatResult = stringConcat.concatenateArray(
     ["first", "second", "third"]);
 console.log(concatResult);
 
-var stringArray: string[] = ["first", "second", "third"];
-var numberArray: number[] = [1, 2, 3];
-var stringResult =
+const stringArray: string[] = ["first", "second", "third"];
+const numberArray: number[] = [1, 2, 3];
+const stringResult =
     stringConcat.concatenateArray(stringArray);
-var numberResult =
+const numberResult =
     numberConcat.concatenateArray(numberArray);
 
     // generates a compiler error
-// var stringResult2 =
+// let stringResult2 =
 //     stringConcat.concatenateArray(numberArray);
-// var numberResult2 =
+// let numberResult2 =
 //     numberConcat.concatenateArray(stringArray);
 
 class MyClass {
     private _name: string;
     constructor(arg1: number) {
-        this._name = arg1 + "_MyClass";
+        this._name = arg1.toString() + "_MyClass";
     }
     toString(): string {
         return this._name;
     }
 }
 
-let myArray: MyClass[] = [
+const myArray: MyClass[] = [
     new MyClass(1),
     new MyClass(2),
     new MyClass(3)];
 
-let myArrayConcatentator = new Concatenator<MyClass>();
-let myArrayResult =
+const myArrayConcatentator = new Concatenator<MyClass>();
+const myArrayResult =
     myArrayConcatentator.concatenateArray(myArray);
 console.log(myArrayResult);
 
@@ -71,8 +71,8 @@ interface IFootballClub {
 abstract class FootballClub implements IFootballClub {
     protected _name: string | undefined;
     protected _homeCountry: ClubHomeCountry | undefined;
-    getName() { return this._name };
-    getHomeCountry() { return this._homeCountry };
+    getName() { return this._name }
+    getHomeCountry() { return this._homeCountry }
 }
 
 class Liverpool extends FootballClub {
@@ -107,7 +107,7 @@ class FootballClubPrinter<T extends IFootballClub>
     }
 }
 
-let clubInfo = new FootballClubPrinter();
+const clubInfo = new FootballClubPrinter();
 clubInfo.print(new Liverpool());
 clubInfo.print(new BorussiaDortmund());
 
@@ -135,12 +135,3 @@ class GenericCreator<T> {
         return new arg1();
     }
 }
-
-var creator1 = new GenericCreator<FirstClass>();
-var firstClass: FirstClass = creator1.create(FirstClass);
-
-var creator2 = new GenericCreator<SecondClass>();
-var secondClass: SecondClass = creator2.create(SecondClass);
-
-
-
