@@ -6,7 +6,8 @@
     "scripts": {
         "checkFormat": "prettier --check \"**/*.{js,json,css,scss}\"",
         "format": "prettier --write \"**/*.{js,json,css,scss}\"",
-        "lint": "eslint src",
+        "lint": "eslint src --fix",
+        "prettier": "prettier src --write",
         "start1": "webpack --mode=development --watch",
         "start": "webpack --mode=development",
         "build": "npm run lint && webpack --mode=production && gulp bundle",
@@ -45,6 +46,7 @@
         "eslint": "^7.4.0",
         "eslint-config-prettier": "^6.11.0",
         "eslint-loader": "^4.0.2",
+        "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-promise": "^4.2.1",
         "jest": "^26.1.0",
         "lint-staged": "^10.2.11",

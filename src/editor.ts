@@ -6,8 +6,7 @@ class Concatenator<T> {
         let returnString = "";
 
         for (let i = 0; i < inputArray.length; i++) {
-            if (i > 0)
-                returnString += ",";
+            if (i > 0) returnString += ",";
             returnString += inputArray[i].toString();
         }
         return returnString;
@@ -17,18 +16,19 @@ class Concatenator<T> {
 const stringConcat = new Concatenator<string>();
 const numberConcat = new Concatenator<number>();
 
-const concatResult = stringConcat.concatenateArray(
-    ["first", "second", "third"]);
+const concatResult = stringConcat.concatenateArray([
+    "first",
+    "second",
+    "third"
+]);
 console.log(concatResult);
 
 const stringArray: string[] = ["first", "second", "third"];
 const numberArray: number[] = [1, 2, 3];
-const stringResult =
-    stringConcat.concatenateArray(stringArray);
-const numberResult =
-    numberConcat.concatenateArray(numberArray);
+const stringResult = stringConcat.concatenateArray(stringArray);
+const numberResult = numberConcat.concatenateArray(numberArray);
 
-    // generates a compiler error
+// generates a compiler error
 // let stringResult2 =
 //     stringConcat.concatenateArray(numberArray);
 // let numberResult2 =
@@ -44,16 +44,11 @@ class MyClass {
     }
 }
 
-const myArray: MyClass[] = [
-    new MyClass(1),
-    new MyClass(2),
-    new MyClass(3)];
+const myArray: MyClass[] = [new MyClass(1), new MyClass(2), new MyClass(3)];
 
 const myArrayConcatentator = new Concatenator<MyClass>();
-const myArrayResult =
-    myArrayConcatentator.concatenateArray(myArray);
+const myArrayResult = myArrayConcatentator.concatenateArray(myArray);
 console.log(myArrayResult);
-
 
 //  Constraining the type of T
 //  ==========================
@@ -69,10 +64,16 @@ interface IFootballClub {
 }
 
 abstract class FootballClub implements IFootballClub {
-    protected _name: string | undefined;
-    protected _homeCountry: ClubHomeCountry | undefined;
-    getName() { return this._name }
-    getHomeCountry() { return this._homeCountry }
+protected _name: string | undefined;
+protected _homeCountry: ClubHomeCountry | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
+    // отключить проверку
+    getName() {
+        return this._name;
+    }
+    getHomeCountry() {
+        return this._homeCountry;
+    }
 }
 
 class Liverpool extends FootballClub {
@@ -94,16 +95,15 @@ class BorussiaDortmund extends FootballClub {
 class FootballClubPrinter<T extends IFootballClub>
     implements IFootballClubPrinter<T> {
     print(arg: T) {
-        console.log(` ${arg.getName()} is ` +
-            `${this.IsEnglishTeam(arg)}` +
-            ` an English football team.`
+        console.log(
+            ` ${arg.getName()} is ` +
+                `${this.IsEnglishTeam(arg)}` +
+                ` an English football team.`
         );
     }
     IsEnglishTeam(arg: T): string {
-        if (arg.getHomeCountry() == ClubHomeCountry.England)
-            return "";
-        else
-            return "NOT"
+        if (arg.getHomeCountry() == ClubHomeCountry.England) return "";
+        else return "NOT";
     }
 }
 
@@ -111,16 +111,13 @@ const clubInfo = new FootballClubPrinter();
 clubInfo.print(new Liverpool());
 clubInfo.print(new BorussiaDortmund());
 
-
 interface IFootballClubPrinter<T extends IFootballClub> {
     print(arg: T): void;
     IsEnglishTeam(arg: T): string;
 }
 
-
 //  Creating new objects
 //  ====================
-
 
 class FirstClass {
     id: number | undefined;
@@ -131,7 +128,7 @@ class SecondClass {
 }
 
 class GenericCreator<T> {
-    create(arg1: { new(): T }): T {
+    create(arg1: { new (): T }): T {
         return new arg1();
     }
 }
