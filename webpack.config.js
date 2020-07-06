@@ -13,22 +13,21 @@ const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
 
 const plugins = () => {
     const base = [
-        new HTMLWebpackPlugin({
-            template: './index.html',
-            minify: {
-                collapseWhitespace: isProd
-            }
-        }),
+        // new HTMLWebpackPlugin({
+        //     template: './index.html',
+        //     minify: {
+        //         collapseWhitespace: isProd
+        //     }
+        // }),
         new CleanWebpackPlugin(),
-        new CopyWebpackPlugin([
+        new CopyWebpackPlugin(
             {
-                from: path.resolve(__dirname, 'src/*.html'),
-                to: path.resolve(__dirname, 'dist')
+                patterns: [
+                    { from: path.resolve(__dirname, 'src/index1.html'), to: path.resolve(__dirname, 'dist') },
+                    { from: path.resolve(__dirname, 'src/index.html')},
+                ],
             }
-        ]),
-        new MiniCssExtractPlugin({
-            filename: filename('css')
-        })
+        ),
     ]
 
     if (isProd) {
@@ -42,7 +41,7 @@ module.exports = (env, argv) => {
     var config = {
         entry: {
             editor: ['@babel/polyfill',"./src/editor.ts"],
-            polish : ['@babel/polyfill',"./src/polish.ts"]
+            polish : ['@babel/polyfill',"./src/lexeme-parce.ts"]
         },
         output: {
             path: path.resolve(__dirname,'dist'),
@@ -56,6 +55,7 @@ module.exports = (env, argv) => {
         },
 
         devtool: isDev ? "source-map" : "",
+        plugins: plugins(),
         module: {
             rules: [
                 {
@@ -106,7 +106,13 @@ module.exports = (env, argv) => {
                                 ]
                             }
                         },
-                        "eslint-loader"
+                        {
+                            loader : 'eslint-loader',
+                            options: {
+                                cache: true,
+                                fix : true,
+                            },
+                        }
                     ]
                 },
             ]

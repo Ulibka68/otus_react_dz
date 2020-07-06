@@ -64,8 +64,8 @@ interface IFootballClub {
 }
 
 abstract class FootballClub implements IFootballClub {
-protected _name: string | undefined;
-protected _homeCountry: ClubHomeCountry | undefined;
+    protected _name: string | undefined;
+    protected _homeCountry: ClubHomeCountry | undefined;
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
     // отключить проверку
     getName() {
