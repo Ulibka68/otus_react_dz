@@ -23,8 +23,8 @@ const plugins = () => {
         new CopyWebpackPlugin(
             {
                 patterns: [
-                    { from: path.resolve(__dirname, 'src/index1.html'), to: path.resolve(__dirname, 'dist') },
-                    { from: path.resolve(__dirname, 'src/index.html')},
+                    { from: path.resolve(__dirname, 'src/index.html'), to: path.resolve(__dirname, 'dist','ind.html') },
+
                 ],
             }
         ),
@@ -40,15 +40,14 @@ const plugins = () => {
 module.exports = (env, argv) => {
     var config = {
         entry: {
-            editor: ['@babel/polyfill',"./src/editor.ts"],
-            polish : ['@babel/polyfill',"./src/lexeme-parce.ts"]
+            polish : ['@babel/polyfill',"./src/main.ts"]
         },
         output: {
             path: path.resolve(__dirname,'dist'),
             filename: filename('js')
         },
         resolve: {
-            extensions: ['.js', '.json', '.png'],
+            extensions: ['.js', '.json', '.png','.ts'],
             alias: {
                 '@': path.resolve(__dirname, 'src')
             }
