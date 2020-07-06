@@ -36,12 +36,12 @@ module.exports = {
         }
     },
 // Плагин с наборами правил для TypeScript
-    "plugins": [
+    plugins : [
         "@typescript-eslint",
         "prettier",
         "promise",
     ],
-    "rules": {
+    rules : {
         'no-console': process.env.NODE_ENV === 'production' ?  ["error", { allow: ["warn", "error"] }] : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
     }

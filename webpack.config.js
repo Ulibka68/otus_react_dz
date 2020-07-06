@@ -1,19 +1,61 @@
 const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
+
+const isDev = process.env.NODE_ENV === 'development'
+const isProd = !isDev
+
+const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+
+
+const plugins = () => {
+    const base = [
+        new HTMLWebpackPlugin({
+            template: './index.html',
+            minify: {
+                collapseWhitespace: isProd
+            }
+        }),
+        new CleanWebpackPlugin(),
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname, 'src/*.html'),
+                to: path.resolve(__dirname, 'dist')
+            }
+        ]),
+        new MiniCssExtractPlugin({
+            filename: filename('css')
+        })
+    ]
+
+    if (isProd) {
+        base.push(new BundleAnalyzerPlugin())
+    }
+
+    return base
+}
 
 module.exports = (env, argv) => {
-    function isDevelopment() {
-        return argv.mode === "development";
-    }
     var config = {
         entry: {
-            editor: "./src/editor.ts"
+            editor: ['@babel/polyfill',"./src/editor.ts"],
+            polish : ['@babel/polyfill',"./src/polish.ts"]
         },
         output: {
             path: path.resolve(__dirname,'dist'),
-            filename: "[name].js"
+            filename: filename('js')
+        },
+        resolve: {
+            extensions: ['.js', '.json', '.png'],
+            alias: {
+                '@': path.resolve(__dirname, 'src')
+            }
         },
 
-        devtool: isDevelopment() ? "cheap-module-source-map" : "source-map",
+        devtool: isDev ? "source-map" : "",
         module: {
             rules: [
                 {
