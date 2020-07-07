@@ -1,7 +1,7 @@
 module.exports = {
     env: {
         browser: true,
-        es6: true,
+        node : true,
         es2020: true,
         jest: true
     },
@@ -11,18 +11,13 @@ module.exports = {
         Promise_example : "off"
     },
     extends: [
-        "eslint:recommended",
-        "plugin:promise/recommended",
-        // Отключаем правила из базового набора
-        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended",
         // Базовые правила для TypeScript
         "plugin:@typescript-eslint/recommended",
         // Правила TS, требующие инфо о типах
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-
-        "plugin:prettier/recommended",
-        "prettier",
-        "prettier/@typescript-eslint"
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     parser: "@typescript-eslint/parser",
 

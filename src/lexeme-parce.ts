@@ -38,6 +38,7 @@ class operandCl implements operand {
 // |   *|/       |     3     |
 // |   ** !+-    |     4     |
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const opeeratorsObj: operand[] = [
     new operandCl("(", 0, "unary", (x: number, y = 0) => {
         return 0;
@@ -74,8 +75,9 @@ const opeeratorsObj: operand[] = [
         let nFaact = 1;
         for (let i = 1; i <= x; i++) nFaact *= i;
         return nFaact;
-    })
+    }),
 ];
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 export function parceInpString(inpStr: string): NumStr[] {
     // чтобы не смешивать с * заменим ** на Square
@@ -84,27 +86,30 @@ export function parceInpString(inpStr: string): NumStr[] {
     const regSearch = new RegExp("(" + operators.join("|\\") + ")", "g");
     inpStr = inpStr.replace(regSearch, "|$1|");
     // console.log(inpStr);
-    const parces: string[] = inpStr.split("|").filter(value => {
+    const parces: string[] = inpStr.split("|").filter((value) => {
         return value != "";
     });
 
     let parcesNum: NumStr[] = []; // eslint-disable-line
-    parces.forEach(value => {
-        isNaN(Number(value))
-            ? parcesNum.push(value)
-            : parcesNum.push(Number(value));
+    parces.forEach((value) => {
+        value = value.trim();
+        if (value != "") {
+            isNaN(Number(value))
+                ? parcesNum.push(value)
+                : parcesNum.push(Number(value));
+        }
     });
     // console.log(parcesNum);
     return parcesNum;
 }
 
 function getOperator(opname: string): operand {
-    let op: operand = opeeratorsObj.find(el => {
+    let op: operand = opeeratorsObj.find((el) => {
         return el.opName === opname;
     });
     if (op === undefined) {
         alert("невереный операнд : " + opname);
-        op = opeeratorsObj.find(el => {
+        op = opeeratorsObj.find((el) => {
             return el.opName === "+";
         });
     }
