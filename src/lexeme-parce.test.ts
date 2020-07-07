@@ -50,9 +50,11 @@ describe('arrayContaining', () => {
 test('convertToPolishNote 3+2', () => {
     let polish = convertToPolishNote([3, "+", 2]);
 
-    expect (polish).toEqual(expect.arrayContaining([3,2]));
-    expect ( (<operand>polish[2]).opName).toEqual("+");
-    expect ( JSON.stringify(polish)).toEqual('[3,2,{"opName":"+","priority":2,"type":"binary"}]');
+    // expect (polish).toEqual(expect.arrayContaining([3,2]));
+    // expect ( (<operand>polish[2]).opName).toEqual("+");
+    // expect ( JSON.stringify(polish)).toEqual('[3,2,{"opName":"+","priority":2,"type":"binary"}]');
+
+    expect ( polish).toEqual([3,2,{exec: expect.any(Function) , opName:"+",priority:2,type:"binary"}]);
 });
 
 
