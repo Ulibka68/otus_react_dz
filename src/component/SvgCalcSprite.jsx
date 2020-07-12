@@ -1,9 +1,9 @@
 import React from "react";
-import css_styles from "./SvgCalcSprite.css";
 
 function SvgCalcSprite() {
     return (
-        <div className="noDisplay" >
+        <div style={{display : "none"}} >
+            <h1>"Эта надпись должна быть скрыта"</h1>
             <svg xmlns="http://www.w3.org/2000/svg"
                  xmlnsXlink="http://www.w3.org/1999/xlink"
                  viewBox="0 0 64 64"

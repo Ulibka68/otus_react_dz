@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 import CalcWrapper from "./CalcWrapper";
+import {CalcInputString} from "../utilites/lexeme-parce";
+
 
 interface IState {
   messageLine : string;
@@ -12,6 +14,7 @@ interface IProps {
 class App extends React.Component<IProps,IState>  {
   constructor(props : IProps) {
     super(props);
+
     this.state = {
       messageLine : "",
     };
@@ -21,7 +24,8 @@ class App extends React.Component<IProps,IState>  {
     //  вычислить выражение
     switch (op) {
       case '=' : // вычислить выражение
-        this.setState({messageLine : "="});
+          const clc = CalcInputString(this.state.messageLine);
+        this.setState({messageLine : clc.toString()});
         break;
       case 'CLEAR' :
         this.setState({messageLine : ""});
