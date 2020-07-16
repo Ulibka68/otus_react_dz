@@ -1,14 +1,8 @@
 module.exports = {
     env: {
         browser: true,
-        node : true,
         es2020: true,
         jest: true
-    },
-    globals : {
-        var1221 : "writable",
-        var2111 : "readonly",
-        Promise_example : "off"
     },
     extends: [
         "plugin:@typescript-eslint/recommended",
