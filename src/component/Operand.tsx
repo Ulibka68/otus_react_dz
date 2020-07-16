@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 import type { OperandProps } from "./component_Interface";
+import {FieldProps} from "../../../ulibka-fork-react-js-tutorial/src/lesson4/interfaces";
+import Field from "../../../ulibka-fork-react-js-tutorial/src/lesson4/Field";
 
 const Operand: FC<OperandProps> = ({ opName, passOperand,handleClick, additional_class }) => {
 
@@ -21,3 +23,4 @@ const Operand: FC<OperandProps> = ({ opName, passOperand,handleClick, additional
 }
 
 export default Operand;
+export const getOperand = (props: OperandProps) => <Operand {...props} />;
