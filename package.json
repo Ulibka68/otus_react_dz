@@ -1,0 +1,63 @@
+{
+    "name": "mytheme-blocks",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "checkFormat": "prettier --check \"**/*.{js,json,css,scss}\"",
+        "format": "prettier --write \"**/*.{js,json,css,scss}\"",
+        "lint": "npx eslint --ext .js,.jsx,.ts,.tsx --fix src/",
+        "prettier": "prettier src --write",
+        "test": "npx jest",
+        "dev": "cross-env NODE_ENV=development webpack --mode development",
+        "build": "cross-env NODE_ENV=production webpack --mode production",
+        "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
+        "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
+        "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json"
+    },
+    "author": "Гайрат",
+    "license": "ISC",
+    "homepage": "https://github.com/Ulibka68/otus_react_dz",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Ulibka68/otus_react_dz"
+    },
+    "browserslist": [
+        "defaults"
+    ],
+    "devDependencies": {
+        "@babel/cli": "^7.10.5",
+        "@babel/core": "^7.10.5",
+        "@babel/plugin-proposal-class-properties": "^7.10.4",
+        "@babel/plugin-proposal-object-rest-spread": "^7.10.4",
+
+        "@babel/preset-env": "^7.10.4",
+        "@babel/preset-typescript": "^7.10.4",
+        "@types/jest": "^26.0.4",
+        "@typescript-eslint/eslint-plugin": "^3.6.1",
+        "@typescript-eslint/parser": "^3.6.1",
+        "autoprefixer": "^9.8.5",
+        "babel-eslint": "^10.1.0",
+        "babel-jest": "^26.1.0",
+        "babel-loader": "^8.1.0",
+        "browserslist": "^4.13.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "copy-webpack-plugin": "^6.0.3",
+        "cross-env": "^7.0.2",
+        "eslint": "^7.4.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-loader": "^4.0.2",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-promise": "^4.2.1",
+        "file-loader": "^6.0.0",
+        "html-webpack-plugin": "^4.3.0",
+        "jest": "^26.1.0",
+        "mini-css-extract-plugin": "^0.9.0",
+        "prettier": "^2.0.5",
+        "ts-node": "^8.10.2",
+        "typescript": "^3.9.6",
+        "webpack": "^4.43.0",
+        "webpack-bundle-analyzer": "^3.8.0",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
+    }
+}

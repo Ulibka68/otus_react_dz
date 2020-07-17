@@ -1,0 +1,9 @@
+обновить пакеты
+npm outdated
+npm update --save @babel/cli  @babel/core @types/jest @typescript-eslint/eslint-plugin @typescript-eslint/parser         autoprefixer browserslist
+
+
+npm list (package_name)
+npm audit fix -f
+
+ "@babel/polyfill": "^7.10.4",
