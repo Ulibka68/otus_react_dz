@@ -5,3 +5,5 @@ npm update --save @babel/cli  @babel/core @types/jest @typescript-eslint/eslint-
 
 npm list (package_name)
 npm audit fix -f
+
+ "@babel/polyfill": "^7.10.4",

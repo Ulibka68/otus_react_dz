@@ -2,12 +2,12 @@ import {
     parceInpString,
     NumStr,
     convertToPolishNote,
-    CalcPolishNote, operand,
+    CalcPolishNote,
+    operand,
 } from "./lexeme-parce";
 
-describe('перевод string в массив - набор операндов parceInpString ', () => {
-
-// parceInpString разбирает строку на массив токенов
+describe("перевод string в массив - набор операндов parceInpString ", () => {
+    // parceInpString разбирает строку на массив токенов
     test(' parceInpString("3+2")', () => {
         expect(parceInpString(" 3+2")).toEqual([3, "+", 2]);
     });
@@ -17,21 +17,29 @@ describe('перевод string в массив - набор операндов 
     });
 });
 
-
-
-test('convertToPolishNote 3+2', () => {
+test("convertToPolishNote 3+2", () => {
     let polish = convertToPolishNote([3, "+", 2]);
 
-    expect ( polish).toEqual([3,2,{exec: expect.any(Function) , opName:"+",priority:2,type:"binary"}]);
+    expect(polish).toEqual([
+        3,
+        2,
+        {
+            exec: expect.any(Function),
+            opName: "+",
+            priority: 2,
+            type: "binary",
+        },
+    ]);
 });
 
-
-describe('Завершающий тест', () => {
-    const parcesNum: NumStr[] = parceInpString(" 3 +3! +2^3 +(2.2***8 +4*5)/   5");
+describe("Завершающий тест", () => {
+    const parcesNum: NumStr[] = parceInpString(
+        " 3 +3! +2^3 +(2.2***8 +4*5)/   5"
+    );
     const polishNote = convertToPolishNote(parcesNum);
     const result = CalcPolishNote(polishNote);
 
-    test('Завершающее вычисление', () => {
+    test("Завершающее вычисление", () => {
         expect(result).toEqual(28.744);
     });
 });
