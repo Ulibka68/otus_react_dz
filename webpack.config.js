@@ -1,33 +1,33 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 // const isDev = process.env.NODE_ENV === 'development';
 const isDev = true;
 const isProd = !isDev;
 
-const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
-const cssLoaders = extra => {
+const cssLoaders = (extra) => {
   const loaders = [
     {
       loader: MiniCssExtractPlugin.loader,
       options: {
         hmr: isDev,
-        reloadAll: true
+        reloadAll: true,
       },
     },
-    'css-loader'
-  ]
+    "css-loader",
+  ];
 
   if (extra) {
-    loaders.push(extra)
+    loaders.push(extra);
   }
 
-  return loaders
-}
+  return loaders;
+};
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -48,7 +48,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: cssLoaders()
+        use: cssLoaders(),
       },
     ],
   },
@@ -60,7 +60,7 @@ module.exports = {
       template: "./assets/index.html",
     }),
     new MiniCssExtractPlugin({
-      filename: filename('css')
+      filename: filename("css"),
     }),
     new CleanWebpackPlugin(),
   ],

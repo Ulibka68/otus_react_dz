@@ -1,71 +1,70 @@
 .button_container {
-    --one-elem-width : 6rem;
-    --grid-gap : 0.2rem;
+  --one-elem-width: 6rem;
+  --grid-gap: 0.2rem;
 
-    border: 2px solid red;
-    width: calc((var(--one-elem-width) + var(--grid-gap)) * 5 + 2rem);
-    display: grid;
-    grid-column-gap : var(--grid-gap);
-    grid-row-gap : calc(var(--grid-gap) * 2);
+  border: 2px solid red;
+  width: calc((var(--one-elem-width) + var(--grid-gap)) * 5 + 2rem);
+  display: grid;
+  grid-column-gap: var(--grid-gap);
+  grid-row-gap: calc(var(--grid-gap) * 2);
 
-    grid-template-columns: repeat(5,var(--one-elem-width));
-    grid-template-rows : calc(var(--one-elem-width) + 1rem);
-    grid-auto-rows: var(--one-elem-width);
+  grid-template-columns: repeat(5, var(--one-elem-width));
+  grid-template-rows: calc(var(--one-elem-width) + 1rem);
+  grid-auto-rows: var(--one-elem-width);
 
-    align-items: stretch;
+  align-items: stretch;
 
-    justify-content: center;
-    padding : calc(var(--grid-gap) * 5) 0;
+  justify-content: center;
+  padding: calc(var(--grid-gap) * 5) 0;
 }
 
 .number {
-    width: calc(var(--one-elem-width) - var(--grid-gap));
-    height: calc(var(--one-elem-width) - var(--grid-gap));
-    background-color: beige;
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    line-height: calc(var(--one-elem-width) - 0.3rem);
-    border-radius : 0.5rem ;
-    cursor: pointer;
+  width: calc(var(--one-elem-width) - var(--grid-gap));
+  height: calc(var(--one-elem-width) - var(--grid-gap));
+  background-color: beige;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: calc(var(--one-elem-width) - 0.3rem);
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 .number:active {
-    animation: circle 0.2s ease-in-out;
+  animation: circle 0.2s ease-in-out;
 }
 
 @keyframes circle {
-    0% {
-        background-color: beige;
-    }
-    100% {
-        background-color: aqua;
-    }
+  0% {
+    background-color: beige;
+  }
+  100% {
+    background-color: aqua;
+  }
 }
 
-
 .result-line {
-    grid-column: 1/6;
-    width: auto;
+  grid-column: 1/6;
+  width: auto;
 }
 
 .svg-operand {
-    width: 40px;
-    height: 40px;
-    color: blue;
-    fill: #94d31b;
-    stroke: #94d31b;
+  width: 40px;
+  height: 40px;
+  color: blue;
+  fill: #94d31b;
+  stroke: #94d31b;
 }
 .svg-operand2 {
-    width: 40px;
-    height: 40px;
-    fill: blue;
+  width: 40px;
+  height: 40px;
+  fill: blue;
 }
 .operand {
-    line-height: calc(var(--one-elem-width) + 0.3rem);
+  line-height: calc(var(--one-elem-width) + 0.3rem);
 }
 .operandC {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: red;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: red;
 }
