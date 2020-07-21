@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import type { OperandProps } from "./component_Interface";
+import type { OperandProps } from "./СomponentInterface";
 
 const Operand: FC<OperandProps> = ({
   opName,

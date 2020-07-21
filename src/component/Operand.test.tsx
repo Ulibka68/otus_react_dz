@@ -1,7 +1,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import Operand, { getOperand } from "./Operand";
-import type { OperandProps } from "./component_Interface";
+import type { OperandProps } from "./СomponentInterface";
 
 describe("Operand test", () => {
   it("Рендер простой строки Operand", () => {
@@ -39,7 +39,7 @@ describe("Operand test", () => {
     // The first argument of the first call to the function was 61
     console.log("Вывод через консоль ***********************");
     expect(handleClick_jest.mock.calls[0][0]).toBe("61");
-    expect(handleClick_jest).toHaveBeenCalledWith('61');
+    expect(handleClick_jest).toHaveBeenCalledWith("61");
   });
 
   it("Рендер картинки SVG Operand", () => {
