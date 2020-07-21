@@ -22,11 +22,18 @@ module.exports = {
       },
     },
   ],
-  webpackFinal: (config) => {
-    config.plugins.push(new webpack.HotModuleReplacementPlugin());
+  webpackFinal:  (config) => {
+    // у меня HotModuleReplacementPlugin уже установлен
+    // config.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+    // Setting up TypeScript with ts-loader
+    // https://storybook.js.org/docs/configurations/typescript-config/
 
     config.module.rules.push({
       test: /\.stories\.tsx$/,
+
+      // @storybook/source-loader
+      // Storybook source-loader is a webpack loader that annotates Storybook story files with their source code. It powers the storysource and docs addons.
       loaders: [
         {
           loader: require.resolve('@storybook/source-loader'),
@@ -54,7 +61,7 @@ module.exports = {
     // 2b. Run `source-loader` on story files to show their source code
     // automatically in `DocsPage` or the `Source` doc block.
     config.module.rules.push({
-      test: /\.(stories|story)\.[tj]sx?$/,
+      test: /\.(stories|story)\.jsx?$/,
       loader: require.resolve('@storybook/source-loader'),
       exclude: [/node_modules/],
       enforce: 'pre',
