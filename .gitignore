@@ -1,0 +1,10 @@
+.history
+.vscode
+node_modules
+dist
+storybook-static
+.idea
+src/*.js
+src/utilites/*.js
+src/component/*.js
+
