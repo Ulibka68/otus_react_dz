@@ -12,6 +12,14 @@ const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 module.exports = {
     entry: "./src/index.tsx",
     devtool: "source-map",
+    mode: isDev ? 'development' : 'production',
+    // tells webpack-dev-server to serve the files from the dist directory on localhost:8080
+    devServer: {
+        stats: 'errors-only',
+        overlay: true,
+        contentBase: path.join(__dirname, "/dist"),
+        hot: true
+    },
     resolve: {
         extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
     },
@@ -52,6 +60,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./public/index.html",
         }),
-        new CleanWebpackPlugin(),
+        // tell CleanWebpackPlugin we dont want to remove index.html file after incremental build triggered by watch
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     ],
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import EmTest from "./EmTest";
 
 interface IState {
   messageLine: string;
@@ -17,7 +18,12 @@ class App extends React.Component<IProps, IState> {
   }
 
   render() {
-    return <h1>Урок 7 CSS in JS</h1>;
+    return (
+      <div>
+        <h1>Урок 7 CSS in JS</h1>
+        <EmTest />
+      </div>
+    );
   }
 }
 
