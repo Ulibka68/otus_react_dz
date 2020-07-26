@@ -66,6 +66,12 @@ export default class Flickr {
     );
   }
 
+  promiseDelay(sec: number): Promise<undefined> {
+    return new Promise<undefined>((resolve, reject) =>
+      setTimeout(resolve, sec)
+    );
+  }
+
   // всегда возвращает promise
   async *getPhotoUrlGenerator(): AsyncGenerator<string> {
     let pageIndex = 0;
@@ -74,9 +80,13 @@ export default class Flickr {
     while (true) {
       if (cache.length === 0) {
         //  заполнить буфер
+        // дадим задержку чтобы не перегружать api
+        await this.promiseDelay(1000);
         cache = await this.getPage(pageIndex);
         pageIndex++;
       }
+      // дадим доп задержку чтобы не отвечать быстро
+      // await this.promiseDelay(500);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       yield cache.pop();
