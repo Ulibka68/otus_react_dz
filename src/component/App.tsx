@@ -1,25 +1,19 @@
 import React from "react";
-import Flickr from "../utilities/Flickr";
+import FlickrContainer from "./FlickrContainer";
 
-interface IState {
-  messageLine: string;
-}
-// eslint-disable-next-line  @typescript-eslint/no-empty-interface
-interface IProps {}
-
-export default class App extends React.Component<IProps, IState> {
+export default class App extends React.Component<any, any> {
   constructor(props?: any) {
     super(props);
-
-    this.state = {
-      messageLine: "",
-    };
-
-    const fl = new Flickr("cats");
-    fl.getPhotoUrlTest();
   }
 
   render() {
-    return <h1>Урок8 начало2</h1>;
+    return (
+      <div>
+        <div>
+          <h1>Урок8 начало</h1>
+        </div>
+        <FlickrContainer />
+      </div>
+    );
   }
 }
