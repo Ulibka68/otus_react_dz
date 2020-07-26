@@ -14,6 +14,9 @@ export default class App extends React.Component<IProps, IState> {
     this.state = {
       messageLine: "",
     };
+
+    const fl = new Flickr("cats");
+    fl.getPhotoUrlTest();
   }
 
   render() {

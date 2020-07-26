@@ -77,12 +77,19 @@ export default class Flickr {
         cache = await this.getPage(pageIndex);
         pageIndex++;
       }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      yield cache.pop();
     }
-    yield <string>cache.pop();
   }
 
   getPhotoUrlTest() {
-    let generator = this.getPhotoUrlGenerator();
-    generator.next();
+    const generator = this.getPhotoUrlGenerator();
+
+    for (let i = 1; i < 45; i++) {
+      generator.next().then((data) => {
+        console.log(data.value);
+      });
+    }
   }
 }
