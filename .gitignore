@@ -5,8 +5,8 @@ dist
 storybook-static
 .idea
 src/*.js
-src/utilites/*.js
+# не класть в репозитарий ключ
+src/utilities/GetApiKey.ts
+src/utilities/*.js
 src/component/*.js
 **/*.map
-
-
