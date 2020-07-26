@@ -1,4 +1,5 @@
 import React from "react";
+import Flickr from "../utilities/Flickr";
 
 interface IState {
   messageLine: string;
@@ -13,6 +14,12 @@ class App extends React.Component<IProps, IState> {
     this.state = {
       messageLine: "",
     };
+
+    const f = new Flickr("cats");
+    // console.log(f.getPage(0));
+    // f.scroll();
+    // f.generateSequenceTest();
+    f.generateAsyncTest();
   }
 
   render() {
