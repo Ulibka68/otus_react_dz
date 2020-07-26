@@ -1,4 +1,5 @@
 import React from "react";
+import Flickr from "../utilities/Flickr";
 
 interface IState {
   messageLine: string;
@@ -6,7 +7,7 @@ interface IState {
 // eslint-disable-next-line  @typescript-eslint/no-empty-interface
 interface IProps {}
 
-class App extends React.Component<IProps, IState> {
+export default class App extends React.Component<IProps, IState> {
   constructor(props?: any) {
     super(props);
 
@@ -19,5 +20,3 @@ class App extends React.Component<IProps, IState> {
     return <h1>Урок8 начало2</h1>;
   }
 }
-
-export default App;
