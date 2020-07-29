@@ -7,5 +7,4 @@ import picts from "../_ficstures/picts.json";
 
 test("picts", () => {
   // console.log(picts);
-
 });
