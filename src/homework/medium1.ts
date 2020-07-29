@@ -5,7 +5,10 @@
 // Нужно заменить FIXME на правильный тип вычисленный на основе Order
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FIXME = any;
+type FIXME =
+  | { state: "initial"; sum: number }
+  | { state: "inWork"; sum: number; workerId: number }
+  | null;
 
 type Order =
   | {
