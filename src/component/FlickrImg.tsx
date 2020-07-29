@@ -10,7 +10,7 @@ interface FlickrImgProps {
 
 const FlickrImg: React.FC<FlickrImgProps> = ({ imgUrl, imgDesc }) => (
   <div className={style.imgContainer}>
-    <img src={imgUrl}  />
+    <img src={imgUrl} />
     <p className={style.imgDesc}>{imgDesc}</p>
   </div>
 );

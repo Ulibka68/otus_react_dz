@@ -63,8 +63,6 @@ class FlickrContainer extends React.Component<any, IState> {
   };
 
   render() {
-    console.log("this.state.urlSet");
-    console.log(this.state);
     return (
       <div>
         {this.state
