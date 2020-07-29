@@ -4,7 +4,9 @@ node_modules
 dist
 storybook-static
 .idea
-src/*.js
+# игнорировать вообще все js файлы
+src/**.*.js
+src/**.*.js.map
 src/utilites/*.js
 src/component/*.js
 
