@@ -1,5 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FIXME = any;
+type FIXME = (
+  | "initial"
+  | "inWork"
+  | "fullfilled"
+  | "buyingSupplies"
+  | "producing"
+)[];
 
 const orderStates = [
   "initial",
@@ -9,7 +15,7 @@ const orderStates = [
   "fullfilled",
 ] as const;
 
-type OrderState = typeof orderStates[number];
+type OrderState = typeof orderStates[number]; // string
 
 // Hint: type guards
 export const getUserOrderStates = (orderStates: OrderState[]): FIXME =>
