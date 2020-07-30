@@ -96,9 +96,9 @@ export default class Flickr {
   getPhotoUrlTest() {
     const generator = this.getPhotoUrlGenerator();
 
-    for (let i = 1; i < 45; i++) {
+    for (let i = 1; i < 5; i++) {
       generator.next().then((data) => {
-        console.log(data.value);
+        console.log(data);
       });
     }
   }

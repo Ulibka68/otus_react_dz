@@ -7,12 +7,22 @@ interface IState {
   tag: string;
 }
 
-class FlickrContainer extends React.Component<any, IState> {
+interface IProps {
+  cntImages: number;
+  intervalEachPicture: number;
+}
+
+class FlickrContainer extends React.Component<IProps, IState> {
   fl: Flickr;
   timerHndlr: number;
   flickrUrlGeneretator: AsyncGenerator<string> | null;
 
-  constructor(props: any) {
+  public static defaultProps: Partial<IProps> = {
+    intervalEachPicture: 100,
+    cntImages: 200,
+  };
+
+  constructor(props: IProps) {
     super(props);
     // this.setState({ urlSet: [] });
     this.fl = new Flickr("cats");
@@ -23,7 +33,10 @@ class FlickrContainer extends React.Component<any, IState> {
   componentDidMount() {
     //    получить новую картинку раз в секунду
     this.setState({ urlSet: [] });
-    this.timerHndlr = window.setInterval(this.newPict, 100);
+    this.timerHndlr = window.setInterval(
+      this.newPict,
+      this.props.intervalEachPicture
+    );
     this.flickrUrlGeneretator = this.fl.getPhotoUrlGenerator();
   }
 
@@ -44,7 +57,7 @@ class FlickrContainer extends React.Component<any, IState> {
 
   newPict = () => {
     // получить еще одну картинку
-    if (this.state.urlSet.length > 200) {
+    if (this.state.urlSet.length > this.props.cntImages) {
       if (this.timerHndlr !== 0) window.clearInterval(this.timerHndlr);
     }
 
