@@ -1,0 +1,15 @@
+.history
+.vscode
+node_modules
+storybook-static
+dist
+tsconfig.json
+**/*.js
+**/*.map
+babel.config.js
+internals/__mocks__/styleMock.js
+internals/jestSettings.js
+jest.config.js
+stories/0-Welcome.stories.js
+stories/1-Button.stories.js
+webpack.config.js
