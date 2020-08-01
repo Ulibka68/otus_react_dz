@@ -1,60 +1,61 @@
-import React, { FC } from "react";
-
-class Executioner extends React.Component {
-  render() {
-    return (this.props.children as any)();
-  }
-}
-
-export const ExecutionerTest: FC = () => (
-  <Executioner>{() => <h1>Hello World!</h1>}</Executioner>
-);
+import React, { FC, ReactNode } from "react";
 
 interface IProps {
-  name2: string;
+  nameGroup: string;
 }
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface IState {}
+type IState = any;
 
-class RadioGroup<IProps, IState> extends React.Component {
+export class RadioGroup extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-    this.name3 = this.props.na;
-    this.renderChildren2 = this.renderChildren2.bind(this);
+    this.renderChildren = this.renderChildren.bind(this);
   }
 
-  renderChildren2() {
-    const nameParent = this.props.name2;
+  renderChildren() {
+    const nameParent = this.props.nameGroup;
 
     return React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {
-        name: this.props.name,
+      return React.cloneElement(child as React.ReactElement<any>, {
+        name: nameParent,
       });
     });
   }
 
   render() {
-    return (
-      <div className="group">
-        {/*{this.props.n}*/}
-        {/*{this.renderChildren2()}*/}
-      </div>
-    );
+    return <div className="group">{this.renderChildren()}</div>;
   }
 }
 
 interface RadioButtonProp {
   value: string;
+  name?: string;
+  labelBefore?: string;
+  labelAfter?: string;
+  checked?: boolean;
 }
 
-export const RadioButton: FC<RadioButtonProp> = (props) => {
-  return <input type="radio" />;
+export const RadioButton: FC<RadioButtonProp> = ({
+  value,
+  name = "nm1",
+  labelBefore,
+  labelAfter,
+  checked = false,
+}) => {
+  return (
+    <label>
+      {labelBefore && labelBefore}
+      <input type="radio" name={name} value={value} />
+      {/* если вводить checked - то надо дописать управляемый компонент */}
+      {/*<input type="radio" name={name} value={value} checked={checked} />*/}
+      {labelAfter && labelAfter}
+    </label>
+  );
 };
 
 export const TestRadioGroup: FC = () => (
-  <RadioGroup name="g1">
-    <RadioButton value="first">First</RadioButton>
-    <RadioButton value="second">Second</RadioButton>
-    <RadioButton value="third">Third</RadioButton>
+  <RadioGroup nameGroup="grp1">
+    <RadioButton value="first" labelAfter="First" />
+    <RadioButton value="second" labelAfter="Second" />
+    <RadioButton value="third" labelAfter="Third" />
   </RadioGroup>
 );

@@ -6,7 +6,7 @@ dist
 tsconfig.json
 **/*.js
 **/*.map
-babel.config.js
+./babel.config.js
 internals/__mocks__/styleMock.js
 internals/jestSettings.js
 jest.config.js

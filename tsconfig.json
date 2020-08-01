@@ -11,6 +11,10 @@
   "exclude": [
     "node_modules",
     "dist",
-    "public"
+    "public",
+    "./*.js",
+    "./internals/**/*",
+    "./stories/0-Welcome.stories.js",
+    "./stories/1-Button.stories.js"
   ]
 }
