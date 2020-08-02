@@ -18,7 +18,7 @@ class FlickrContainer extends React.Component<IProps, IState> {
   flickrUrlGeneretator: AsyncGenerator<string> | null;
 
   public static defaultProps: Partial<IProps> = {
-    intervalEachPicture: 100,
+    intervalEachPicture: 100, // через какое время в милисекундах будет запрашивать следующая картинка
     cntImages: 200,
   };
 

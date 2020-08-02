@@ -59,7 +59,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "formik": "^2.1.5",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "yup": "^0.29.2"
   }
 }
