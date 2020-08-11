@@ -1,0 +1,57 @@
+import React, { HTMLAttributes } from "react";
+type ColorName = "green" | "yellow";
+type IconName = "bank";
+
+function getClassName(
+  color: ColorName | undefined,
+  className?: string
+): string {
+  return "ClassName";
+}
+
+type FlexContainerProps = React.HTMLAttributes<HTMLDivElement>;
+function FlexContainer({ children, ...props }: FlexContainerProps) {
+  return <div {...props}>{children}</div>;
+}
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  color?: ColorName;
+  icon?: IconName;
+}
+
+function Button({ color, icon, className, children, ...props }: ButtonProps) {
+  return (
+    <button {...props} className={getClassName(color, className)}>
+      <FlexContainer>
+        {/*{icon && <Icon name={icon} />}*/}
+        <div>{children}</div>
+      </FlexContainer>
+    </button>
+  );
+}
+
+<Button
+  onKeyDown={({ currentTarget }) => {
+    /* do something */
+  }}
+/>;
+
+// <Button foo="bar" /> // Correctly errors
+
+interface ButtonProps {
+  tagName: "a" | "button";
+}
+
+type TagNameProps = React.LinkHTMLAttributes<HTMLLinkElement> | React.ButtonHTMLAttributes<HTMLButtonElement>;
+function TagName( ) {
+    return ();
+}
+
+function Button2<P extends ButtonProps>({
+  tagName ,
+  ...props
+}: P & JSX.IntrinsicElements[P["tagName"]]) {
+  return <TagName tagName={tagName} {...props} />;
+}
+
+<Button2 tagName="a" href="/" />;
