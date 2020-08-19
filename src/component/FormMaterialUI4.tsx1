@@ -1,0 +1,118 @@
+// пакеты отсюда
+// github.com/uNmAnNeR/imaskjs
+// https://github.com/uNmAnNeR/imaskjs/tree/master/packages/react-imask
+
+import React from "react";
+import {
+  Formik,
+  Form,
+  Field,
+  FieldInputProps,
+  FieldMetaProps,
+  FormikProps,
+} from "formik";
+import { Button, LinearProgress } from "@material-ui/core";
+import { TextField } from "formik-material-ui";
+import { IMaskMixin } from "react-imask";
+
+type textFieldVariant = "filled" | "outlined" | "standard";
+
+interface custFieldComponentProps {
+  /** string - Value of the field */
+  field: FieldInputProps<string>;
+
+  /* тип, передаваемый в FormikProps равен Form values */
+  form: FormikProps<FormValues>;
+  meta: FieldMetaProps<FormValues>;
+}
+
+interface FormValues {
+  name: string;
+  phone: string;
+  custinput: string;
+}
+
+function childrenFuncHOCInput(placeholder: string) {
+  function childrenFunc(fldProp: custFieldComponentProps) {
+    return (
+      <div>
+        <input type="text" placeholder={placeholder} {...fldProp.field} />
+        {fldProp.meta.touched && fldProp.meta.error && (
+          <div className="error">{fldProp.meta.error}</div>
+        )}
+      </div>
+    );
+  }
+  return childrenFunc;
+}
+
+const MaskedStyledInput = IMaskMixin(({ inputRef, ...props }) => (
+  <div
+    {...props}
+    innerRef={inputRef} // bind internal input (if you use styled-components V4, use "ref" instead "innerRef")
+  />
+));
+
+export default function FormMaterialUI() {
+  return (
+    <Formik
+      initialValues={{
+        phone: "",
+        name: "",
+        custinput: "",
+      }}
+      validate={(values) => {
+        const errors: Partial<FormValues> = {};
+        if (!values.name) {
+          errors.name = "Required";
+        }
+        if (!values.phone || values.phone === "  ") {
+          errors.phone = "Required phone";
+        }
+        console.log("values.phone|", values.phone, "|");
+        if (!values.custinput) {
+          errors.custinput = "Required custinput";
+        }
+        return errors;
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          setSubmitting(false);
+          alert(JSON.stringify(values, null, 2));
+        }, 500);
+      }}
+    >
+      {/*{({ submitForm, isSubmitting }) => (*/}
+      {(props: FormikProps<any>) => (
+        <Form>
+          <Field
+            component={TextField}
+            name="name"
+            type="input"
+            label="First name"
+          />
+          <br />
+          <Field name="custinput" label="Custinput">
+            {childrenFuncHOCInput("custinput")}
+          </Field>
+
+          <Field name="phone" label="Phone">
+            {childrenFuncHOC("ququ", "standard", "Phone label")}
+          </Field>
+
+          {/* SUBMIT */}
+          {props.isSubmitting && <LinearProgress />}
+          <br />
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={props.isSubmitting}
+            onClick={props.submitForm}
+          >
+            Submit
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+}

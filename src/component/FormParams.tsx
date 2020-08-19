@@ -1,46 +1,49 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import {
   Formik,
   Form,
   useField,
-  FieldHelperProps,
-  FieldInputProps,
-  FieldMetaProps,
+  FieldHookConfig,
+  FieldConfig,
+  Field,
+  ErrorMessage,
 } from "formik";
-import styled from "@emotion/styled";
 import * as yup from "yup";
-
-// from "formik/dist/types";
-import { FieldHookConfig, FieldConfig } from "formik/dist/Field";
 
 /*
 const formSchema = Yup.object().shape({
-    amount: Yup.number().required('Amount is required'),
-    currency: Yup.string().required('Currency is required')
-});
-
 type InvoiceLevelTotal = typeof formSchema.[something]
  */
 
+export interface SignupFormFields {
+  firstName: string;
+  lastName?: string;
+  email?: string;
+  acceptedTerms?: boolean;
+  jobType?: string;
+}
+
 const personSchema = yup
-  .object({
+  .object<SignupFormFields>({
     firstName: yup
       .string()
-      // Here we use `defined` instead of `required` to more closely align with
-      // TypeScript. Both will have the same effect on the resulting type by
-      // excluding `undefined`, but `required` will also disallow other values
-      // such as empty strings.
-      .defined(),
-    nickName: yup.string().defined().nullable(),
-    gender: yup
-      .mixed()
-      // Note `as const`: this types the array as `["male", "female", "other"]`
-      // instead of `string[]`.
-      .oneOf(["male", "female", "other"] as const)
-      .defined(),
-    email: yup.string().nullable().notRequired().email(),
-    birthDate: yup.date().nullable().notRequired().min(new Date(1900, 0, 1)),
+      .min(3, "Имя пользователя должно быть не менее 3 букв")
+      .required("требуется ввести Имя пользователя"),
+    // Here we use `defined` instead of `required` to more closely align with
+    // TypeScript. Both will have the same effect on the resulting type by
+    // excluding `undefined`, but `required` will also disallow other values
+    // such as empty strings.
+
+    // nickName: yup.string().defined().nullable(),
+    // gender: yup
+    //   .mixed()
+    //   // Note `as const`: this types the array as `["male", "female", "other"]`
+    //   // instead of `string[]`.
+    //   .oneOf(["male", "female", "other"] as const)
+    //   .defined(),
+    email: yup.string().email().notRequired(),
+    acceptedTerms: yup.boolean().notRequired(),
+    // birthDate: yup.date().nullable().notRequired().min(new Date(1900, 0, 1)),
   })
   .defined();
 // You can derive the TypeScript type as follows:
@@ -142,6 +145,7 @@ const MySelect = ({ label, name, id, children, ...props }: MySelectProps) => {
 };
 
 // And now we can use these
+/*
 const SignupForm = () => {
   return (
     <>
@@ -192,6 +196,34 @@ const SignupForm = () => {
             I accept the terms and conditions
           </MyCheckbox>
 
+          <button type="submit">Submit</button>
+        </Form>
+      </Formik>
+    </>
+  );
+};
+*/
+
+const SignupForm = () => {
+  return (
+    <>
+      <h1>Subscribe!</h1>
+      <Formik
+        initialValues={{
+          firstName: "",
+        }}
+        validationSchema={personSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        <Form>
+          <label htmlFor="firstName">First Name</label>
+          <Field name="firstName" type="text" />
+          <ErrorMessage name="firstName" />
           <button type="submit">Submit</button>
         </Form>
       </Formik>

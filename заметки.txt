@@ -1,0 +1,57 @@
+MATERIAL
+
+function CreditCardMaskWrapper(pattern) {
+  return (props) => {
+    return (
+      <MaskedInput
+        {...props}
+        mask={pattern}
+        placeholderChar={'\u2000'}
+        showMask={false}
+      />
+    )
+  };
+}
+And then you can:
+
+     const pattern = [ /\d/, /\d/, /\d/, /\d/ ];
+
+     <Input
+        name="cardNo"
+        inputComponent={CreditCardMaskWrapper(pattern)}
+        onChange={this.onChange}
+        inputProps={{ 'aria-label': 'card no' }}
+        disableUnderline
+     />
+
+=============================
+const ExpirationMask = props => {
+  const { inputRef, ...other } = props
+
+  return <MaskedInput
+      {...other}
+      ref={ref => {inputRef(ref ? ref.inputElement : null)}}
+      mask={[/\d/, /\d/,'/' ,/\d/, /\d/]}
+      placeholderChar={'\u2000'}
+    />
+}
+
+<FormControl
+  fullWidth
+  margin='dense'
+>
+<InputLabel
+  classes={{ root: classes.expInputRoot }}
+  error={ccExpiration.trim().length < 5}
+  color='primary'>
+  Expiration
+</InputLabel>
+<OutlinedInput
+  value={ccExpiration}
+  onChange={(e, v) => setCCExpiration(e.target.value)}
+  label="Expiration"
+  placeholder='MM/YY'
+  error={ccExpiration.trim().length < 5}
+  inputComponent={ExpirationMask}
+/>
+</FormControl>
