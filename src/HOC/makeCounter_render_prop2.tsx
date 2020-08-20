@@ -7,7 +7,7 @@ interface InjectedCounterProps {
 }
 
 interface CounterProps extends InjectedCounterProps {
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
 }
 
 interface MakeCounterProps {
@@ -69,10 +69,11 @@ const Counter = (props: CounterProps) => (
   </div>
 );
 
-interface WrappedCounterProps extends CounterProps {
+interface WrappedCounterProps {
   minValue: number;
   maxValue: number;
   initialValue?: number;
+  style?: React.CSSProperties;
 }
 
 export const WrappedCounter = ({

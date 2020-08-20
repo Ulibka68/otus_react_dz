@@ -3,7 +3,7 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs, object } from "@storybook/addon-knobs";
 
 import { makeCounter3, InjectedCounterProps } from "./makeCounter_render_prop3";
-import { CounterProps } from "./makeCounter_render_prop";
+
 
 export default {
   title: "HOC",
