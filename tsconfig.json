@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "jsx": "react",
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "allowJs": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "public",
+    "babel.config.js",
+    "internals/**/*",
+    "jest.config.js",
+    "stories/0-Welcome.stories.js",
+    "stories/1-Button.stories.js",
+    "webpack.config.js"
+  ]
+}
