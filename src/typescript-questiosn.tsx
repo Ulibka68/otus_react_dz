@@ -7,6 +7,11 @@ type Tail<T extends any[]> = ((...t: T) => any) extends (
   ? TT
   : [];
 
+// any ? TT : [];
+// type Tail<T extends any[]> =
+// ((...t: T) => any) extends ( _: any, ...tail: infer TT ) => any
+//     ? TT : []
+
 type test11 = Tail<[1, 2, string, number]>; // [2, string,number]
 const a: test11 = [2, "a", 55];
 //const b: test11 = [3, "a", 55]; // Error  Type '3' is not assignable to type '2'.
@@ -59,3 +64,16 @@ type test35 = Prepend<number, [1, 2]>; // [number,1,2]
 
 const a34: test34 = ["a"];
 const a35: test35 = [45, 1, 2];
+
+type Last3<T extends any[]> = HasTail<T> extends true ? Last<Tail<T>> : Head<T>;
+
+type Last2<T extends any[]> = HasTail<T> extends true
+  ? Last2<Tail<T>>
+  : Head<T>;
+
+type test40 = Last2<[1, 2, 3, string]>; //string
+const a40: test40 = "a";
+
+type t41 = { a: string; b: number };
+type t42 = t41["a"];
+const a42: t42 = "a";
