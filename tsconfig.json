@@ -13,5 +13,17 @@
     "sourceMap": true,
     "strict": true,
     "esModuleInterop": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "public",
+    "babel.config.js",
+    "internals/**/*",
+    "jest.config.js",
+    "stories/0-Welcome.stories.js",
+    "stories/1-Button.stories.js",
+    "webpack.config.js",
+    "webpackRules.js"
+  ]
 }
