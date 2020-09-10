@@ -1,12 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { LoginScreen } from "@/screens/LoginScreen";
-import { FieldScreen } from "@/screens/FieldScreen";
-import { NoMatchScreen } from "@/screens/NoMatchScreen";
-import { UserScreen } from "@/screens/UserScreen";
-import { ReduxScreen } from "@/screens/ReduxScreen";
 import { Provider } from "react-redux";
-import { store } from "@/rdx/store";
+// import { store } from "@/redux/store";
 
 export const App: React.FC<{}> = () => (
   <Provider store={store}>
@@ -28,14 +23,16 @@ export const App: React.FC<{}> = () => (
         </ul>
       </nav>
       <Switch>
-        <Route path="/login">
-          <LoginScreen />
-        </Route>
-        <Route path="/field" render={() => <FieldScreen />} />
-        <Route path="/user/:name" component={UserScreen} />
-        <Route path="/redux" component={ReduxScreen} />
+        {/*<Route path="/login">*/}
+        {/*  <LoginScreen />*/}
+        {/*</Route>*/}
+        {/*<Route path="/field" render={() => <FieldScreen />} />*/}
+        {/*<Route path="/user/:name" component={UserScreen} />*/}
+        {/*<Route path="/redux" component={ReduxScreen} />*/}
         <Route path="*">
-          <NoMatchScreen />
+          <div>
+            <h1>Путь по умолчанию</h1>
+          </div>
         </Route>
       </Switch>
     </Router>
