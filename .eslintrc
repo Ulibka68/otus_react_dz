@@ -20,14 +20,6 @@
         "message": "Restricted default export, prefer named exports!"
       }
     ],
-    "no-console": [
-      "error",
-      { "allow": [
-          "warn",
-          "error"
-        ]
-      }
-    ],
     "@typescript-eslint/explicit-function-return-type": 0,
     "react/prop-types": 0,
     "react-hooks/rules-of-hooks": "error",

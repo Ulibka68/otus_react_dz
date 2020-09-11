@@ -5,3 +5,6 @@ dist
 storybook-static
 .idea/*
 .idea
+src/**/*.js
+src/**/*.map
+
