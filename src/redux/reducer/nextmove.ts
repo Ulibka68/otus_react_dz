@@ -1,36 +1,38 @@
-import {createAction, createSlice, SliceCaseReducers} from "@reduxjs/toolkit";
+import { createAction, createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 
 type nextMoveState = "x" | "o";
 
 const defaultStatenextMove: nextMoveState = "x";
 
-
 type nextMoveSliceReducerOptionType = SliceCaseReducers<nextMoveState>;
 
-const incrementBy = createAction('incrementBy');
+const incrementBy = createAction("incrementBy");
 // extraReducers
 // лучше всего строить черз builder
 
-export const nextMove = createSlice<nextMoveState,nextMoveSliceReducerOptionType>({
-    name: 'nextMove',
-    initialState:defaultStatenextMove,
-    reducers:{
-        oMove(state,action) {
-            return "x";
-        },
-        xMove(state,action) {
-            return "o";
-        },
+export const nextMove = createSlice<
+  nextMoveState,
+  nextMoveSliceReducerOptionType
+>({
+  name: "nextMove",
+  initialState: defaultStatenextMove,
+  reducers: {
+    oMove(state, action) {
+      return "x";
     },
-    extraReducers: {
-        incrementByReducer: (state, action) => {
-            if ( incrementBy.match(action) ) {
-                return "x"
-            }
-        }
-    }
+    xMove(state, action) {
+      return "o";
+    },
+  },
+  extraReducers: {
+    incrementByReducer: (state, action) => {
+      if (incrementBy.match(action)) {
+        return "x";
+      }
+    },
+  },
 
-    /*
+  /*
     extraReducers: builder =>
     {
         builder.addCase(incrementBy,
@@ -41,19 +43,17 @@ export const nextMove = createSlice<nextMoveState,nextMoveSliceReducerOptionType
      */
 });
 
-
 /*type AppActions = typeof appActions;
 type AppActionsType = AppActions[keyof AppActions]['type'];
 const x1:AppActionsType = 'a1';*/
 
-console.log('nextMove.actions : ', nextMove.actions);
+console.log("nextMove.actions : ", nextMove.actions);
 console.log(nextMove.actions.oMove.type);
 
-
 type AppActions = typeof nextMove.actions;
-type AppActionsType = AppActions[keyof AppActions]['type'];
+type AppActionsType = AppActions[keyof AppActions]["type"];
 
-const a : AppActionsType = 'nextMove';
+const a: AppActionsType = "nextMove";
 
 /*
 type GameFieldState = string[][];

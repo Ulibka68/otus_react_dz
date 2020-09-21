@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
+import SwapiPage from "@/pages/swapiPage"
 
 export const App: React.FC<{}> = () => (
   <Provider store={store}>
@@ -9,7 +10,7 @@ export const App: React.FC<{}> = () => (
       <nav>
         <ul>
           <li>
-            <Link to="/login">Login</Link>
+            <Link to="/swapi">Star Wars Peoples</Link>
           </li>
           <li>
             <Link to="/field">Field</Link>
@@ -23,7 +24,7 @@ export const App: React.FC<{}> = () => (
         </ul>
       </nav>
       <Switch>
-        {/*<Route path="/login">*/}
+        <Route path="/swapi" component={SwapiPage} />
         {/*  <LoginScreen />*/}
         {/*</Route>*/}
         {/*<Route path="/field" render={() => <FieldScreen />} />*/}

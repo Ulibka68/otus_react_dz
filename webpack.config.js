@@ -11,6 +11,7 @@ module.exports = {
     alias: {
       types: path.resolve(__dirname, "src/types"),
       components: path.resolve(__dirname, "src/components"),
+      "@future": path.resolve(__dirname, "src/futures"),
       "@": path.resolve(__dirname, "src"),
     },
   },
