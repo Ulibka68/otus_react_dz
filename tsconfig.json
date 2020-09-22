@@ -4,6 +4,7 @@
     "paths": {
       "types/*": ["src/types/*"],
       "components/*": ["src/components/*"],
+      "@future/*": ["src/futures/*"],
       "@/*": ["src/*"]
     },
     "target": "es5",

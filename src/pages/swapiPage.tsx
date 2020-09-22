@@ -21,7 +21,6 @@ type Props = PropsFromRedux & {
 
 class SwapiPageL extends React.Component<Props> {
   fetchPeoples = () => {
-    console.log("fetch");
     this.props.fetchPeoples(0);
   };
   render() {

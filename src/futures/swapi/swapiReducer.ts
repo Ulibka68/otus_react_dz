@@ -28,41 +28,28 @@ import {
   SliceCaseReducers,
 } from "@reduxjs/toolkit";
 import { sleep } from "@/utils/sleep";
+import { RootStateType } from "@/redux/reducer/index";
 
 // в процессе запроса будем менять состояние
-type loadingStateType = "idle" | "pending" | "fulfilled" | "rejected";
+type loadingStateType =
+  | "idle"
+  | "pending"
+  | "fulfilled"
+  | "rejected"
+  | "abortpending";
 
 interface initialStateType {
   loading: loadingStateType;
   error: string; // если нет ошибки - то ''
-  peoples: swapiPeopleType[];
+  peoples: any[];
 }
 
 interface MyKnownError {
   errorMessage: string;
 }
 
-export interface swapiPeopleType {
-  name: string;
-  height?: number;
-  mass?: number;
-  hair_color?: string;
-  skin_color?: string;
-  eye_color?: string;
-  birth_year?: string;
-  gender?: string;
-  homeworld?: string; // "http://swapi.dev/api/planets/1/"
-  films: string[]; //    "http://swapi.dev/api/films/1/",
-  species: [];
-  vehicles: string[]; //    "http://swapi.dev/api/vehicles/14/",
-  starships: string[];
-  created?: string;
-  edited?: string;
-  url: string; // она же id "http://swapi.dev/api/people/1/"
-}
-
 // тип того что возвращает createAsyncThunk
-type MyData = swapiPeopleType[]; // массив людей
+type MyData = any[]; // массив людей
 
 // что надо передать в action creator - одно значение только
 type payloadCreatorType = number; // будем условно считать что передавать будем номер page
@@ -83,11 +70,18 @@ export const fetchPeoples = createAsyncThunk<
   // Types for ThunkAPI
   {
     dispatch: any;
-    state: initialStateType;
+    // state: initialStateType; - ошибочно задал тип - на вход поступает общий тип state
+    state: RootStateType;
     rejectValue: MyKnownError;
   }
 >("swapi/fetchPeoples", async (pageNumber, thunkApi) => {
-  await sleep(1000);
+  if (thunkApi.getState().swapi.loading === "abortpending") {
+    return thunkApi.rejectWithValue({
+      errorMessage: "Не завершена обработка предыдущего вызова",
+    });
+  }
+
+  await sleep(2000);
   const response = await fetch(`http://swapi.dev/api/people/`, {
     method: "GET",
     mode: "cors",
@@ -138,11 +132,36 @@ export const swapiPeopleSlice = createSlice<
         }
       }),
       builder.addCase(fetchPeoples.pending, (state, action) => {
-        state.peoples = [];
-        state.error = "";
-        state.loading = "pending";
+        if (state.loading === "pending") {
+          state.loading = "abortpending";
+        } else {
+          state.peoples = [];
+          state.error = "";
+          state.loading = "pending";
+        }
       });
   },
 });
 
 // для использования запускай dispatch(fetchPeoples(1))
+/*
+export interface swapiPeopleType {
+  name: string;
+  height?: number;
+  mass?: number;
+  hair_color?: string;
+  skin_color?: string;
+  eye_color?: string;
+  birth_year?: string;
+  gender?: string;
+  homeworld?: string; // "http://swapi.dev/api/planets/1/"
+  films: string[]; //    "http://swapi.dev/api/films/1/",
+  species: [];
+  vehicles: string[]; //    "http://swapi.dev/api/vehicles/14/",
+  starships: string[];
+  created?: string;
+  edited?: string;
+  url: string; // она же id "http://swapi.dev/api/people/1/"
+}
+
+ */

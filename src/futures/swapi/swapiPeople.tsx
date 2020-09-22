@@ -1,9 +1,9 @@
+/** @jsx jsx */
 import React from "react";
 
 // import styled from "@emotion/styled";
 // import { css } from "@emotion/core";
 
-/** @jsx jsx */
 import { jsx } from "@emotion/core";
 
 const Box: React.FC = ({ children }) => (
