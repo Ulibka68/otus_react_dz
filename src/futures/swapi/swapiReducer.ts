@@ -13,7 +13,6 @@ src/lesson17/homework/asyncFlow.ts
 +1 балл за тесты
 +1 балл за разнение по разных файлам и объединение в duck
 
-Redux Thunk автоматически подключается в configureStore - поэтому дополнительных усилий предпринимать не надо
 */
 
 // Action creators
@@ -75,6 +74,10 @@ export const fetchPeoples = createAsyncThunk<
     rejectValue: MyKnownError;
   }
 >("swapi/fetchPeoples", async (pageNumber, thunkApi) => {
+  // такая проверка здесь не нужна
+  // нужно либо поставить disabled на button
+  // либо завести локальную переменную в которой отслеживать состояние
+  // кстати во время запроса генерируется уникальный  thunkApi.requestId - который тоже можно проверять
   if (thunkApi.getState().swapi.loading === "abortpending") {
     return thunkApi.rejectWithValue({
       errorMessage: "Не завершена обработка предыдущего вызова",
