@@ -60,6 +60,7 @@ type payloadCreatorType = number; // будем условно считать ч
     fulfilled:  'swapi/fetchPeoples/fulfilled'
     rejected:   'swapi/fetchPeoples/rejected'
  */
+// для использования запускай dispatch(fetchPeoples(1))
 
 export const fetchPeoples = createAsyncThunk<
   // Return type of the payload creator
