@@ -85,7 +85,7 @@ export const fetchPeoples = createAsyncThunk<
     });
   }
 
-  await sleep(1000);
+  await sleep(500);
   const response = await fetch(`http://swapi.dev/api/people/`, {
     method: "GET",
     mode: "cors",

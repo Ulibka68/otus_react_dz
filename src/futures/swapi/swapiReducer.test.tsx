@@ -30,18 +30,24 @@ describe("ReduxData with mocked store", () => {
   const preloadedState = {
     swapi: { loading: "idle", error: "", peoples: [] },
   };
+
   const store = configureStore({
     reducer,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     preloadedState,
   });
+
   store.dispatch(fetchPeoples(1));
 
   it("задержка и вывод", async () => {
     // за 2 сек (с учетом задержки 1 сек) данные должны появиться
-    await sleep(2000);
+    jest.setTimeout(15000);
+    await sleep(9000);
     // console.log(store.getState());
 
     const state1 = store.getState();
+    // console.log(state1);
     expect(state1).toMatchInlineSnapshot(
       {
         error: "",
@@ -62,43 +68,39 @@ describe("ReduxData with mocked store", () => {
     `
     );
 
-    /*
-    expect(store.getState()).toMatchInlineSnapshot(`
+    const peoples = state1.peoples;
+    expect(peoples[0]).toMatchInlineSnapshot(
+      {
+        birth_year: expect.any(String),
+        films: expect.any(Array),
+        name: expect.any(String),
+      },
+      `
       Object {
-        "error": "",
-        "loading": "fulfilled",
-        "peoples": Array [
-          Object {
-            "birth_year": "19BBY",
-            "created": "2014-12-09T13:50:51.644000Z",
-            "edited": "2014-12-20T21:17:56.891000Z",
-            "eye_color": "blue",
-            "films": Array [
-              "http://swapi.dev/api/films/1/",
-              "http://swapi.dev/api/films/2/",
-              "http://swapi.dev/api/films/3/",
-              "http://swapi.dev/api/films/6/",
-            ],
-            "gender": "male",
-            "hair_color": "blond",
-            "height": "172",
-            "homeworld": "http://swapi.dev/api/planets/1/",
-            "mass": "77",
-            "name": "Luke Skywalker",
-            "skin_color": "fair",
-            "species": Array [],
-            "starships": Array [
-              "http://swapi.dev/api/starships/12/",
-              "http://swapi.dev/api/starships/22/",
-            ],
-            "url": "http://swapi.dev/api/people/1/",
-            "vehicles": Array [
-              "http://swapi.dev/api/vehicles/14/",
-              "http://swapi.dev/api/vehicles/30/",
-            ],
-          },
-    `);
-
-     */
+        "birth_year": Any<String>,
+        "created": "2014-12-09T13:50:51.644000Z",
+        "edited": "2014-12-20T21:17:56.891000Z",
+        "eye_color": "blue",
+        "films": Any<Array>,
+        "gender": "male",
+        "hair_color": "blond",
+        "height": "172",
+        "homeworld": "http://swapi.dev/api/planets/1/",
+        "mass": "77",
+        "name": Any<String>,
+        "skin_color": "fair",
+        "species": Array [],
+        "starships": Array [
+          "http://swapi.dev/api/starships/12/",
+          "http://swapi.dev/api/starships/22/",
+        ],
+        "url": "http://swapi.dev/api/people/1/",
+        "vehicles": Array [
+          "http://swapi.dev/api/vehicles/14/",
+          "http://swapi.dev/api/vehicles/30/",
+        ],
+      }
+    `
+    );
   });
 });
