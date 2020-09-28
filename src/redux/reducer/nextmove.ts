@@ -49,7 +49,7 @@ export const nextMove = createSlice<
   },
 });
 
-console.log("nextMove.actions : ", nextMove.actions);
+// console.log("nextMove.actions : ", nextMove.actions);
 /*
   nextMove.actions : { oMove : function, xMove : function}
   oMove.type = "nextMove/oMove"
@@ -101,7 +101,7 @@ type TopNavState2 = {
 
 const stringLitArray = <L extends string>(arr: L[]) => arr;
 const fruit = stringLitArray(["apple", "banana", "grape"]); // тип массив string
-console.log(fruit);
+// console.log(fruit);
 export type Fruit = (typeof fruit)[number];
 const a41 : Fruit = 'apple';
 

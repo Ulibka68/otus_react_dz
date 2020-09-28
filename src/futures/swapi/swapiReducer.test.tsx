@@ -7,6 +7,8 @@ import { swapiPeopleSlice, fetchPeoples } from "./swapiReducer";
 import thunk from "redux-thunk";
 import { configureStore } from "@reduxjs/toolkit";
 import { sleep } from "@/utils/sleep";
+import { RootStateType } from "@/redux/reducer/index";
+import { store } from "@/redux/store";
 
 // The fetch API is not implemented in Node.
 //проверить какие данные возвращает fetch
@@ -25,17 +27,10 @@ describe("ReduxData with real store", () => {
  */
   window.fetch = require("node-fetch");
 
-  const reducer = swapiPeopleSlice.reducer;
-  const preloadedState = {
+  const preloadedState: RootStateType = {
     swapi: { loading: "idle", error: "", peoples: [] },
+    move: "o",
   };
-
-  const store = configureStore({
-    reducer,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    preloadedState,
-  });
 
   store.dispatch(fetchPeoples(1));
 
@@ -43,9 +38,8 @@ describe("ReduxData with real store", () => {
     // за 2 сек (с учетом задержки 1 сек) данные должны появиться
     jest.setTimeout(15000);
     await sleep(9000);
-    // console.log(store.getState());
 
-    const state1 = store.getState();
+    const state1 = store.getState().swapi;
     // console.log(state1);
     expect(state1).toMatchInlineSnapshot(
       {
@@ -58,11 +52,6 @@ describe("ReduxData with real store", () => {
         "error": "",
         "loading": "fulfilled",
         "peoples": Any<Array>,
-        "swapi": Object {
-          "error": "",
-          "loading": "idle",
-          "peoples": Array [],
-        },
       }
     `
     );
@@ -103,4 +92,3 @@ describe("ReduxData with real store", () => {
     );
   });
 });
-

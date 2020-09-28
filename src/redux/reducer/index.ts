@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { nextMove } from "@/redux/reducer/nextmove";
-import { swapiPeopleSlice } from "@future/swapi/swapiReducer";
+import { swapiPeopleSlice } from "@/futures/swapi/swapiReducer";
 
 export const reducer = combineReducers({
   move: nextMove.reducer,
