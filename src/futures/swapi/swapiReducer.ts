@@ -128,12 +128,15 @@ export const swapiPeopleSlice = createSlice<
         state.peoples = [];
         state.loading = "rejected";
         state.error = "";
+        console.log(action);
 
-        if ("errorMessage" in action.payload!) {
-          state.error = action.payload!.errorMessage;
-        } else if (typeof action.payload === "string") {
-          state.error = action.payload;
-        }
+        if (action.payload) {
+          if ("errorMessage" in action.payload!) {
+            state.error = action.payload!.errorMessage;
+          } else if (typeof action.payload === "string") {
+            state.error = action.payload;
+          }
+        } else state.error = "Неизвестная ошибка";
       }),
       builder.addCase(fetchPeoples.pending, (state, action) => {
         if (state.loading === "pending") {
@@ -169,3 +172,20 @@ export interface swapiPeopleType {
 }
 
  */
+
+/*
+async function fetchUser() {
+  const response = await fetch(`http://swapi.dev/api/people/`, {
+    method: "GET",
+    mode: "cors",
+    credentials: "same-origin",
+  });
+  if (!response.ok) {
+    // Return the known error for future handling
+    throw new Error("проблема с сетью");
+  }
+
+  const data = await response.json();
+  return data;
+}
+*/
