@@ -21,15 +21,25 @@ interface Props {
     ls  : lifeState;
 }
 
-export const GameSpacePage : React.FC<Props> = ({ sizex,sizey,ls }) => {
+export class GameSpacePage extends React.Component<Props> {
+    calcNextState = () => {
+        const {ls} = this.props;
+        ls.nextState();
+        ls.caclNeighbors();
+        this.forceUpdate();
+    }
 
-    return(
-        <div>
-            <FlexWrapper>
-                <GameSpace sizex={sizex} sizey ={sizey} cellsState={ls} cellSize={20} showNeighbors={false} />
-                <GameSpace sizex={sizex} sizey ={sizey} cellsState={ls} cellSize={20} showNeighbors={true} />
-            </FlexWrapper>
+    render() {
+        const { sizex,sizey,ls } = this.props;
+        return(
+            <div>
+                <FlexWrapper>
+                    <GameSpace sizex={sizex} sizey ={sizey} cellsState={ls} cellSize={20} showNeighbors={false} />
+                    <GameSpace sizex={sizex} sizey ={sizey} cellsState={ls} cellSize={20} showNeighbors={true} />
+                </FlexWrapper>
 
-            <Btn>Следующее состояние</Btn>
-        </div>
-)};
+                <Btn onClick={this.calcNextState}>Следующее состояние</Btn>
+            </div>
+        )
+    }
+}

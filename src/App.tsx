@@ -18,7 +18,10 @@ export const App: React.FC<{}> = () => (
       <nav>
         <ul>
           <li>
-            <Link to="/gamespace">Поле для игры</Link>
+            <Link to="/">Начало</Link>
+          </li>
+          <li>
+            <Link to="/gamespace">Поле для игры тестовое</Link>
           </li>
         </ul>
       </nav>
