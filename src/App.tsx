@@ -2,7 +2,15 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
-import {GameSpacePage} from "@/pages/gamespace";
+import {GameSpacePage} from "@/pages/gamespacePage";
+import {lifeState} from "@/redux/state_logic";
+
+const sizex=15;
+const sizey=15;
+
+const ls = new lifeState(sizex,sizey);
+ls.randomSeed(0.2);
+ls.caclNeighbors();
 
 export const App: React.FC<{}> = () => (
   <Provider store={store}>
@@ -16,7 +24,8 @@ export const App: React.FC<{}> = () => (
       </nav>
       <Switch>
         <Route path="/gamespace">
-          <GameSpacePage sizex={15} sizey={15} />
+
+          <GameSpacePage sizex={sizex} sizey={sizey} ls={ls} />
         </Route>
 
         <Route path="*">
