@@ -1,7 +1,4 @@
-// /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-// если jsx не импортировать  - то в консоли вываливается с ошибкой
-// import { css } from '@emotion/core'
+import { css } from '@emotion/core'
 import styled from "@emotion/styled";
 import React from "react";
 import {lifeState} from "@/redux/state_logic";
@@ -12,46 +9,6 @@ export interface Props {
   sizey : number;
   cellsState : lifeState;
 }
-
-
-/*
-const grCont_div = css`
-    background-color: beige;
-    font-size: 10px;
-    line-height: 8px;
-    padding-left: 2px;
-`;
-*/
-/* <div css={[danger, base]}>
-
-<div
-    css={[
-      { color: 'darkorchid' },
-      { backgroundColor: 'hotpink' },
-      { padding: 8 }
-    ]}
-  >
-
- <div>
-    <style>
-      {`
-        .danger {
-          color: red;
-        }
-        .base {
-          background-color: lightgray;
-          color: turquoise;
-        }
-      `}
-      >
-    </style>
-    <p className="base danger">What color will this be?</p>
-  </div>
-
-  const Button = styled.button`  font-size: ${props => props.primary ? '2em' : '1em'};`
- */
-
-
 
 const GridWrapper = styled.div<{sizex : number}>`
    background: aqua;
@@ -79,7 +36,7 @@ export const GameSpace: React.FC<Props> = ({ sizex,sizey,cellsState }) => {
     for (let y = 0; y < sizey; y++) {
         for (let x = 0; x < sizex; x++) {
             insideCell.push(
-                <div key={`${x}_${y}`}>
+                <div key={`${x}_${y}`} data-xy={`${x}_${y}`}>
                     {cellsState.state[y][x] ? 'o' : ''}
                 </div>
             );
@@ -89,7 +46,6 @@ export const GameSpace: React.FC<Props> = ({ sizex,sizey,cellsState }) => {
   return (
       <GridWrapper sizex={sizex}>
           <GrCont sizex={sizex} sizey = {sizey}>
-            <div>o</div>
             { insideCell}
           </GrCont>
       </GridWrapper>
