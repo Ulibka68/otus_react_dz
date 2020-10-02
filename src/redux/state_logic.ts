@@ -4,8 +4,7 @@ export class lifeState {
 
   constructor(
     public sizex: number,
-    public sizey: number,
-    public seedPercent: number
+    public sizey: number
   ) {
     //  инициализировать массив
     this.state = Array.from(Array(sizey), () => new Array(sizex).fill(0));
@@ -18,9 +17,9 @@ export class lifeState {
     return x;
   }
 
-  rendomSeed() {
+  randomSeed(seedPercent: number) {
     //  заполнить массив случайно
-    const totalSize = Math.floor(this.sizex * this.sizey * this.seedPercent);
+    const totalSize = Math.floor(this.sizex * this.sizey * seedPercent);
     for (let i = 0; i < totalSize; i++) {
       const xRand = this.randSize(this.sizex);
       const yRand = this.randSize(this.sizey);

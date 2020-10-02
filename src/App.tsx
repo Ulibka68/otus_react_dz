@@ -16,7 +16,7 @@ export const App: React.FC<{}> = () => (
       </nav>
       <Switch>
         <Route path="/gamespace">
-          <GameSpacePage sizex={4} sizey={4} />
+          <GameSpacePage sizex={10} sizey={10} />
         </Route>
 
         <Route path="*">
