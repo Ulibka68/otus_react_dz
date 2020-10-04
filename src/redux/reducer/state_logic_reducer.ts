@@ -4,7 +4,7 @@ import {
   SliceCaseReducers,
 } from "@reduxjs/toolkit";
 
-interface lifeStateType {
+export interface lifeStateType {
   state: number[][];
   neighbors: number[][];
   sizex: number;
@@ -27,6 +27,38 @@ function fillStateFromConst(
   for (let y = 0; y < b.length; y++) {
     for (let x = 0; x < b[0].length; x++) {
       state[starty + y][startx + x] = b[y][x];
+    }
+  }
+}
+
+function caclNeighborsInternal(state: lifeStateType, action: any) {
+  function checkOneNeigbor(
+    deltaX: number,
+    deltaY: number,
+    x: number,
+    y: number
+  ): number {
+    x += deltaX;
+    y += deltaY;
+
+    if (x < 0 || y < 0) return 0;
+    if (x >= state.sizex || y >= state.sizey) return 0;
+    return state.state[y][x];
+  }
+
+  for (let y = 0; y < state.sizey; y++) {
+    for (let x = 0; x < state.sizex; x++) {
+      let numNeighbors = 0;
+
+      // 8 вариантов соседей
+      for (let deltaX = -1; deltaX <= 1; deltaX++) {
+        for (let deltaY = -1; deltaY <= 1; deltaY++) {
+          if (!(deltaX === 0 && deltaY === 0))
+            numNeighbors += checkOneNeigbor(deltaX, deltaY, x, y);
+        }
+      }
+
+      state.neighbors[y][x] = numNeighbors;
     }
   }
 }
@@ -139,3 +171,11 @@ export const lifeStateSlice = createSlice<
     },
   },
 });
+
+export const {
+  initState,
+  randomSeed,
+  planer1Seed,
+  caclNeighbors,
+  nextState,
+} = lifeStateSlice.actions;

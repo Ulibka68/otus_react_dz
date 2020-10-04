@@ -8,3 +8,5 @@ export const reducer = combineReducers({
   move: nextMove.reducer,
   lifeState: lifeStateSlice.reducer,
 });
+
+export type RootState = ReturnType<typeof reducer>;
