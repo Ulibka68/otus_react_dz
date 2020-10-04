@@ -20,7 +20,7 @@ export const nextMove = createSlice<nextMoveState,nextMoveSliceReducerOptionType
     }
 });
 
-console.log('nextMove.actions : ', nextMove.actions);
+// console.log('nextMove.actions : ', nextMove.actions);
 
 /*
 type GameFieldState = string[][];
