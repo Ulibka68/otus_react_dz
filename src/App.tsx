@@ -3,18 +3,10 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import { GameSpacePage } from "@/pages/gamespacePage";
-import { lifeState } from "@/redux/state_logic";
 import * as life from "@/redux/reducer/state_logic_reducer";
 
-const sizex = 15;
-const sizey = 15;
-
-const ls = new lifeState(sizex, sizey);
-ls.randomSeed(0.2);
-ls.caclNeighbors();
-
 /* Провести начальную инициализацию жизни  */
-store.dispatch(life.initState({ sizex: 15, sizey: 15 }));
+store.dispatch(life.initState({ sizex: 4, sizey: 4 }));
 store.dispatch(life.randomSeed({ seedPercent: 0.2 }));
 store.dispatch(life.caclNeighbors(null));
 
@@ -33,7 +25,7 @@ export const App: React.FC<{}> = () => (
       </nav>
       <Switch>
         <Route path="/gamespace">
-          <GameSpacePage sizex={sizex} sizey={sizey} ls={ls} />
+          <GameSpacePage />
         </Route>
 
         <Route path="*">

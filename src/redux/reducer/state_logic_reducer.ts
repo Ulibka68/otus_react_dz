@@ -1,4 +1,5 @@
 import {
+  CaseReducer,
   createSlice,
   PayloadAction,
   SliceCaseReducers,
@@ -31,7 +32,10 @@ function fillStateFromConst(
   }
 }
 
-function caclNeighborsInternal(state: lifeStateType, action: any) {
+const caclNeighbors: CaseReducer<lifeStateType, PayloadAction<void>> = (
+  state,
+  action
+) => {
   function checkOneNeigbor(
     deltaX: number,
     deltaY: number,
@@ -61,7 +65,7 @@ function caclNeighborsInternal(state: lifeStateType, action: any) {
       state.neighbors[y][x] = numNeighbors;
     }
   }
-}
+};
 
 export const lifeStateSlice = createSlice<
   lifeStateType,
@@ -125,37 +129,7 @@ export const lifeStateSlice = createSlice<
       );
     },
 
-    caclNeighbors(state, action) {
-      function checkOneNeigbor(
-        deltaX: number,
-        deltaY: number,
-        x: number,
-        y: number
-      ): number {
-        x += deltaX;
-        y += deltaY;
-
-        if (x < 0 || y < 0) return 0;
-        if (x >= state.sizex || y >= state.sizey) return 0;
-        return state.state[y][x];
-      }
-
-      for (let y = 0; y < state.sizey; y++) {
-        for (let x = 0; x < state.sizex; x++) {
-          let numNeighbors = 0;
-
-          // 8 вариантов соседей
-          for (let deltaX = -1; deltaX <= 1; deltaX++) {
-            for (let deltaY = -1; deltaY <= 1; deltaY++) {
-              if (!(deltaX === 0 && deltaY === 0))
-                numNeighbors += checkOneNeigbor(deltaX, deltaY, x, y);
-            }
-          }
-
-          state.neighbors[y][x] = numNeighbors;
-        }
-      }
-    },
+    caclNeighbors,
 
     nextState(state, action) {
       for (let y = 0; y < state.sizey; y++) {
@@ -168,6 +142,7 @@ export const lifeStateSlice = createSlice<
           }
         }
       }
+      caclNeighbors(state, action);
     },
   },
 });
@@ -176,6 +151,8 @@ export const {
   initState,
   randomSeed,
   planer1Seed,
-  caclNeighbors,
   nextState,
 } = lifeStateSlice.actions;
+
+const caclNeighborsAction = lifeStateSlice.actions.caclNeighbors;
+export { caclNeighborsAction as caclNeighbors };

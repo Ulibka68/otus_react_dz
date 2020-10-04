@@ -2,7 +2,7 @@ import React from "react";
 import { lifeState } from "@/redux/state_logic";
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "@/redux/reducer/index";
 import * as life from "@/redux/reducer/state_logic_reducer";
 
@@ -17,39 +17,17 @@ const Btn = styled.button`
 
 import { GameSpace } from "@/components/gameSpace";
 
-interface Props {
-  sizex: number;
-  sizey: number;
-  ls: lifeState;
-}
-
-export class GameSpacePage extends React.Component<Props> {
+class GameSpacePageClass extends React.Component<Props> {
   calcNextState = () => {
-    const { ls } = this.props;
-    ls.nextState();
-    ls.caclNeighbors();
-    this.forceUpdate();
+    this.props.nextState;
   };
 
   render() {
-    const { sizex, sizey, ls } = this.props;
     return (
       <div>
         <FlexWrapper>
-          <GameSpace
-            sizex={sizex}
-            sizey={sizey}
-            cellsState={ls}
-            cellSize={20}
-            showNeighbors={false}
-          />
-          <GameSpace
-            sizex={sizex}
-            sizey={sizey}
-            cellsState={ls}
-            cellSize={20}
-            showNeighbors={true}
-          />
+          <GameSpace cellSize={20} showNeighbors={false} />
+          <GameSpace cellSize={20} showNeighbors={true} />
         </FlexWrapper>
 
         <Btn onClick={this.calcNextState}>Следующее состояние</Btn>
@@ -58,7 +36,14 @@ export class GameSpacePage extends React.Component<Props> {
   }
 }
 
-export const GameSpacePageRedux = connect(
-  (state: RootState) => state.lifeState,
-  { caclNeighbors: life.caclNeighbors, nextState: life.nextState }
-)(GameSpacePage);
+const connector = connect((state: RootState) => state.lifeState, {
+  caclNeighbors: life.caclNeighbors,
+  nextState: life.nextState,
+});
+
+// The inferred type will look like:
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = PropsFromRedux;
+
+export const GameSpacePage = connector(GameSpacePageClass);
