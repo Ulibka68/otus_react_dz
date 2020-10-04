@@ -2,10 +2,7 @@ export class lifeState {
   state: number[][] = [[0]];
   neighbors: number[][] = [[0]];
 
-  constructor(
-    public sizex: number,
-    public sizey: number
-  ) {
+  constructor(public sizex: number, public sizey: number) {
     //  инициализировать массив
     this.state = Array.from(Array(sizey), () => new Array(sizex).fill(0));
     this.neighbors = Array.from(Array(sizey), () => new Array(sizex).fill(0));
