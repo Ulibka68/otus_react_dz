@@ -19,7 +19,7 @@ import { GameSpace } from "@/components/gameSpace";
 
 class GameSpacePageClass extends React.Component<Props> {
   calcNextState = () => {
-    this.props.nextState;
+    this.props.nextState(null);
   };
 
   render() {

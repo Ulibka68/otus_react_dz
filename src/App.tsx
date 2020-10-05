@@ -6,8 +6,8 @@ import { GameSpacePage } from "@/pages/gamespacePage";
 import * as life from "@/redux/reducer/state_logic_reducer";
 
 /* Провести начальную инициализацию жизни  */
-store.dispatch(life.initState({ sizex: 4, sizey: 4 }));
-store.dispatch(life.randomSeed({ seedPercent: 0.2 }));
+store.dispatch(life.initState({ sizex: 30, sizey: 30 }));
+store.dispatch(life.randomSeed({ seedPercent: 0.3 }));
 store.dispatch(life.caclNeighbors(null));
 
 export const App: React.FC<{}> = () => (
