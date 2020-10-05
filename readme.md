@@ -16,6 +16,13 @@ Redux-saga advanced concept
 + 1 балл за работоспособное приложение
 + 1 балл за добавление / улучшение тестов 
 
+************************
+Добавляем список пакетов для saga
+dev:
+npm i -D redux-logger redux-mock-store redux-saga-test-plan
+
+prod:
+npm i -S redux-dynamic-modules redux-dynamic-modules-saga redux-saga
 
 ************************
 Выписки из Emotion:

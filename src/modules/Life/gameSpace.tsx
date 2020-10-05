@@ -1,9 +1,9 @@
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import React from "react";
-import * as life from "@/redux/reducer/state_logic_reducer";
+import * as life from "@/modules/Life/state_logic_reducer";
 import { connect, ConnectedProps } from "react-redux";
-import { RootState } from "@/redux/reducer";
+import { LifeGameRootState } from "@/redux/store";
 
 const GridWrapper = styled.div<{ sizex: number; cellSize: number }>`
   background: aqua;
@@ -57,7 +57,7 @@ const GameSpaceFC: React.FC<Props> = ({
   );
 };
 
-const connector = connect((state: RootState) => state.lifeState);
+const connector = connect((state: LifeGameRootState) => state.lifeState);
 
 // The inferred type will look like:
 type PropsFromRedux = ConnectedProps<typeof connector>;

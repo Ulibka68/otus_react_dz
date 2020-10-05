@@ -32,9 +32,8 @@ function fillStateFromConst(
   }
 }
 
-const caclNeighbors: CaseReducer<lifeStateType, PayloadAction<void>> = (
-  state,
-  action
+const caclNeighborsInternal: CaseReducer<lifeStateType, PayloadAction<void>> = (
+  state
 ) => {
   function checkOneNeigbor(
     deltaX: number,
@@ -129,7 +128,7 @@ export const lifeStateSlice = createSlice<
       );
     },
 
-    caclNeighbors,
+    caclNeighbors: caclNeighborsInternal,
 
     nextState(state, action) {
       for (let y = 0; y < state.sizey; y++) {
@@ -142,17 +141,17 @@ export const lifeStateSlice = createSlice<
           }
         }
       }
-      caclNeighbors(state, action);
+      caclNeighbors(state);
     },
   },
 });
 
+// export const { reducer, actions } = lifeStateSlice;
+export const { reducer } = lifeStateSlice;
 export const {
-  initState,
-  randomSeed,
-  planer1Seed,
   nextState,
+  caclNeighbors,
+  planer1Seed,
+  randomSeed,
+  initState,
 } = lifeStateSlice.actions;
-
-const caclNeighborsAction = lifeStateSlice.actions.caclNeighbors;
-export { caclNeighborsAction as caclNeighbors };

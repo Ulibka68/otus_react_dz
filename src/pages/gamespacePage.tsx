@@ -1,10 +1,9 @@
 import React from "react";
-import { lifeState } from "@/redux/state_logic";
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import { connect, ConnectedProps } from "react-redux";
-import { RootState } from "@/redux/reducer/index";
-import * as life from "@/redux/reducer/state_logic_reducer";
+import { LifeGameRootState } from "@/redux/store";
+import * as life from "@/modules/Life/state_logic_reducer";
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -15,7 +14,7 @@ const Btn = styled.button`
   margin-top: 20px;
 `;
 
-import { GameSpace } from "@/components/gameSpace";
+import { GameSpace } from "@/modules/Life/gameSpace";
 
 class GameSpacePageClass extends React.Component<Props> {
   calcNextState = () => {
@@ -36,7 +35,7 @@ class GameSpacePageClass extends React.Component<Props> {
   }
 }
 
-const connector = connect((state: RootState) => state.lifeState, {
+const connector = connect((state: LifeGameRootState) => state.lifeState, {
   caclNeighbors: life.caclNeighbors,
   nextState: life.nextState,
 });

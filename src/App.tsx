@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import { GameSpacePage } from "@/pages/gamespacePage";
-import * as life from "@/redux/reducer/state_logic_reducer";
+import * as life from "@/modules/Life/state_logic_reducer";
 
 /* Провести начальную инициализацию жизни  */
 store.dispatch(life.initState({ sizex: 30, sizey: 30 }));
