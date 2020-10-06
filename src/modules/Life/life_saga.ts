@@ -1,7 +1,7 @@
 import { takeEvery, call, put, fork } from "redux-saga/effects";
 
 function* tesSagaJob() {
-  console.log("Hello Sagas!");
+  console.error("Hello Sagas!");
 }
 
 export function* lifeSaga() {

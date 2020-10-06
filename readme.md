@@ -25,6 +25,15 @@ prod:
 npm i -S redux-dynamic-modules redux-dynamic-modules-saga redux-saga
 
 ************************
+https://redux-saga.js.org/
+
+Первый запуск
+1. import createSagaMiddleware from 'redux-saga'
+2. const sagaMiddleware = createSagaMiddleware()
+3. const store = createStore(reducer,applyMiddleware(sagaMiddleware)   )
+4. sagaMiddleware.run(helloSaga)
+
+************************
 Выписки из Emotion:
 
 const grCont_div = css`

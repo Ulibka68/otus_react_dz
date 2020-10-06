@@ -13,17 +13,18 @@ const reducer = combineReducers({
   lifeState: lifeStateSlice.reducer,
 });
 
-/*export const store = configureStore({
+export const store = configureStore({
   reducer,
   middleware: [sagaMiddleware],
 });
 
 sagaMiddleware.run(rootSaga);
 
-*/
-
+/*
 export const store = configureStore({
   reducer,
 });
+
+ */
 
 export type LifeGameRootState = ReturnType<typeof reducer>;
