@@ -6,7 +6,7 @@ import { GameSpacePage } from "@/pages/gamespacePage";
 import * as life from "@/modules/Life/state_logic_reducer";
 
 /* Провести начальную инициализацию жизни  */
-store.dispatch(life.initState({ sizex: 30, sizey: 30 }));
+store.dispatch(life.initState({ sizex: 10, sizey: 10 }));
 store.dispatch(life.randomSeed({ seedPercent: 0.3 }));
 store.dispatch(life.caclNeighbors(null));
 

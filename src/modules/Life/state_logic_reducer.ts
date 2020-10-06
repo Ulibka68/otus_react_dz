@@ -141,7 +141,7 @@ export const lifeStateSlice = createSlice<
           }
         }
       }
-      caclNeighbors(state);
+      caclNeighborsInternal(state, action);
     },
   },
 });
