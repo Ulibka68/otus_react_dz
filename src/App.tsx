@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import { GameSpacePage } from "@/pages/gamespacePage";
 import * as life from "@/modules/Life/state_logic_reducer";
+import { ChanelsWindow } from "@/pages/chanelsWindow";
 
 /* Провести начальную инициализацию жизни  */
 store.dispatch(life.initState({ sizex: 10, sizey: 10 }));
@@ -26,6 +27,9 @@ export const App: React.FC<{}> = () => (
       <Switch>
         <Route path="/gamespace">
           <GameSpacePage />
+        </Route>
+        <Route path="/gamespace">
+          <ChanelsWindow />
         </Route>
 
         <Route path="*">
