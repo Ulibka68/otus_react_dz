@@ -34,6 +34,33 @@ https://redux-saga.js.org/
 4. sagaMiddleware.run(helloSaga)
 
 ************************
+yeld fork results in a **Task Object.** We assign the returned object into a local constant task. Later if we take a LOGOUT action, we pass that task to the cancel Effect. If the task is still running, it'll be aborted.
+
+finally {
+    if (yield cancelled()) {
+      // ... put special cancellation handling code here
+    }
+************************
+###### Описан внешний канал событий на таймере
+
+https://redux-saga.js.org/docs/advanced/Channels.html
+
+actionChannel  - буферизация событий
+************************
+ветка express ssr в repo
+
+ajax-http
+
+###### https://redux-observable.js.org/
+
+************************
+**Using Channels** <br>
+actionChannel Effect
+const requestChan = yield actionChannel('REQUEST')
+
+Using the **eventChannel** factory to connect to external events<br>
+eventChannel(subscribe, [buffer])
+************************
 Выписки из Emotion:
 
 const grCont_div = css`
@@ -71,3 +98,5 @@ const grCont_div = css`
 
   const Button = styled.button`  font-size: ${props => props.primary ? '2em' : '1em'};`
  */
+
+[Каналы]: https://redux-saga.js.org/docs/advanced/Channels.html
