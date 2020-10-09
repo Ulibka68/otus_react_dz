@@ -37,7 +37,7 @@ export const App: React.FC<{}> = () => (
 
         <Route path="*">
           <div>
-            <h1>Путь по умолчанию2</h1>
+            <h1>Нажмите на меню чтобы запустить процесс</h1>
           </div>
         </Route>
       </Switch>
