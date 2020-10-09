@@ -12,7 +12,8 @@ const ChanelWrapper = styled.div<{ bacgroundColor: string }>`
 class ChanelsWindowClass extends React.Component<Props, any> {
   clickHandler = (evt: React.SyntheticEvent) => {
     console.log(evt);
-    evt.preventDefault();
+    // evt.preventDefault();
+    evt.stopPropagation();
   };
   render() {
     return (
