@@ -19,8 +19,20 @@ import { GameSpace } from "@/modules/Life/gameSpace";
 class GameSpacePageClass extends React.Component<Props> {
   calcNextState = () => {
     this.props.nextState(null);
-    this.forceUpdate();
+    // this.forceUpdate();
   };
+
+  startTimerSaga = () => {
+    this.props.startTimer();
+  };
+
+  stopTimerSaga = () => {
+    this.props.stopTimer();
+  };
+
+  componentWillUnmount() {
+    this.stopTimerSaga();
+  }
 
   render() {
     return (
@@ -31,6 +43,8 @@ class GameSpacePageClass extends React.Component<Props> {
         </FlexWrapper>
 
         <Btn onClick={this.calcNextState}>Следующее состояние</Btn>
+        <Btn onClick={this.startTimerSaga}>Запустить таймер</Btn>
+        <Btn onClick={this.stopTimerSaga}>Остановить таймер</Btn>
       </div>
     );
   }
@@ -39,6 +53,8 @@ class GameSpacePageClass extends React.Component<Props> {
 const connector = connect((state: LifeGameRootState) => state.lifeState, {
   caclNeighbors: life.caclNeighbors,
   nextState: life.nextState,
+  stopTimer: life.stopTimer,
+  startTimer: life.startTimer,
 });
 
 // The inferred type will look like:

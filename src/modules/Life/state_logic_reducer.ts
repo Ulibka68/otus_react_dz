@@ -1,5 +1,6 @@
 import {
   CaseReducer,
+  createAction,
   createSlice,
   PayloadAction,
   SliceCaseReducers,
@@ -130,7 +131,7 @@ export const lifeStateSlice = createSlice<
 
     caclNeighbors: caclNeighborsInternal,
 
-    nextState(state, action) {
+    nextState(state, action: PayloadAction<void>) {
       for (let y = 0; y < state.sizey; y++) {
         for (let x = 0; x < state.sizex; x++) {
           if (state.state[y][x] > 0) {
@@ -145,6 +146,9 @@ export const lifeStateSlice = createSlice<
     },
   },
 });
+
+export const stopTimer = createAction<void>("lifeState/STOP_TIMER");
+export const startTimer = createAction<void>("lifeState/START_TIMER");
 
 // export const { reducer, actions } = lifeStateSlice;
 export const { reducer } = lifeStateSlice;
