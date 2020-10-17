@@ -3,9 +3,13 @@ import { GlobalWindowClickSaga } from "./chanelsWindowSaga";
 import {
   cnahelWindow_STOP_SAGA,
   cnahelWindow_START_SAGA,
+  InitWindowState,
 } from "@/modules/ChanelWindow/chanelsWindowReducer";
 import { IModule } from "redux-dynamic-modules";
 import { ISagaModule } from "redux-dynamic-modules-saga";
+import * as thunk from "redux-thunk";
+import { put } from "redux-saga/effects";
+import * as wind from "@/modules/ChanelWindow/chanelsWindowReducer";
 
 function cancelWindowSaga() {
   return (dispatch: any, getState: any) => {
@@ -13,8 +17,10 @@ function cancelWindowSaga() {
   };
 }
 
+// return (dispatch: thunk.ThunkDispatch<any, any, any>, getState: any) => {
 function startWindowSaga() {
   return (dispatch: any, getState: any) => {
+    dispatch(InitWindowState());
     dispatch(cnahelWindow_START_SAGA());
   };
 }
@@ -32,6 +38,7 @@ export function getCahnelsWindowModule(): ISagaModule<typeof reducer> {
     // { saga: usersSagaWithArguments, argument: { a: "argument" } },
     sagas: [GlobalWindowClickSaga],
     // Optional: Any actions to dispatch when the module is loaded
+
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     initialActions: [startWindowSaga()],

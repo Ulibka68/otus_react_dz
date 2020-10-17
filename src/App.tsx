@@ -7,9 +7,11 @@ import * as life from "@/modules/Life/state_logic_reducer";
 import { ChanelsWindow } from "@/modules/ChanelWindow/chanelsWindow";
 
 /* Провести начальную инициализацию жизни  */
+/*
 store.dispatch(life.initState({ sizex: 10, sizey: 10 }));
 store.dispatch(life.randomSeed({ seedPercent: 0.3 }));
 store.dispatch(life.caclNeighbors(null));
+*/
 
 export const App: React.FC<{}> = () => (
   <Provider store={store}>
