@@ -11,22 +11,20 @@ import * as wind from "@/modules/ChanelWindow/chanelsWindowReducer";
 import { Action, Middleware, ReducersMapObject } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 
+import { createAsyncThunk, Dispatch } from "@reduxjs/toolkit";
+
+type TchanelWindowState = ReturnType<typeof reducer>;
+type getStateType = () => TchanelWindowState;
+
 function cancelWindowSaga() {
-  return (dispatch: any, getState: any) => {
+  return (dispatch: Dispatch, getState: getStateType) => {
     dispatch(cnahelWindow_STOP_SAGA());
   };
 }
-/*
- * S - state
- * E - extraArgument
- * R - возвращаемый тип
- * A - A extends Action
- * */
-type AnyAction<R, S, E, A extends Action> = (
-  dispatch: ThunkDispatch<S, E, A>,
-  getState: () => S,
-  extraArgument: E
-) => R;
+
+interface AnyAction<StateType> extends Action<any> {
+  (dispatch: Dispatch, getState: () => StateType): any;
+}
 
 /**
  * Represents a module which is set of reducers, sagas, initial actions and final actions
@@ -40,7 +38,7 @@ interface IModule<State> {
   /**
    * Reducers for the module
    */
-  reducerMap?: ReducersMapObject<State, AnyAction<any, any, any, Action<any>>>;
+  reducerMap?: ReducersMapObject<State, AnyAction<State>>;
 
   /**
    * Middlewares to add to the store
@@ -50,12 +48,12 @@ interface IModule<State> {
   /**
    * These actions are dispatched immediately after adding the module in the store
    */
-  initialActions?: AnyAction[];
+  initialActions?: AnyAction<State>[];
 
   /**
    * These actions are dispatched immediatly before removing the module from the store
    */
-  finalActions?: AnyAction[];
+  finalActions?: AnyAction<State>[];
 
   /**
    * Specifies if the module is retained forever in the store
@@ -76,7 +74,7 @@ interface ISagaModule<T> extends IModule<T> {
 
 // return (dispatch: thunk.ThunkDispatch<any, any, any>, getState: any) => {
 function startWindowSaga() {
-  return (dispatch: any, getState: any) => {
+  return (dispatch: Dispatch, getState: getStateType) => {
     dispatch(InitWindowState());
     dispatch(cnahelWindow_START_SAGA());
   };
@@ -98,8 +96,9 @@ export function getCahnelsWindowModule(): ISagaModule<typeof reducer> {
 
     initialActions: [startWindowSaga()],
     // Optional: Any actions to dispatch when the module is unloaded
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     finalActions: [cancelWindowSaga()],
   };
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
