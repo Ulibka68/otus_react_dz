@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { lifeStateSlice } from "@/modules/Life";
 
 const ColorMaps = [
   "lightGray",
@@ -32,3 +33,10 @@ export const chanelWindowSlice = createSlice({
 // export const { reducer, actions } = lifeStateSlice;
 export const { reducer } = chanelWindowSlice;
 export const { changeBgColor, nextColor } = chanelWindowSlice.actions;
+
+export const cnahelWindow_STOP_SAGA = createAction<void>(
+  "cnahelWindow/STOP_SAGA"
+);
+export const cnahelWindow_START_SAGA = createAction<void>(
+  "cnahelWindow/START_SAGA"
+);

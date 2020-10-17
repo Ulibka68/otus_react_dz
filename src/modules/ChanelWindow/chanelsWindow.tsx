@@ -2,6 +2,8 @@ import React from "react";
 import styled from "@emotion/styled";
 import { connect, ConnectedProps } from "react-redux";
 import { LifeGameRootState } from "@/redux/store";
+import { DynamicModuleLoader } from "redux-dynamic-modules";
+import { getCahnelsWindowModule } from "./chanelsWindowModule";
 
 const ChanelWrapper = styled.div<{ bacgroundColor: string }>`
   background: ${({ bacgroundColor }) => bacgroundColor};
@@ -15,14 +17,17 @@ class ChanelsWindowClass extends React.Component<Props, any> {
     // evt.preventDefault();
     evt.stopPropagation();
   };
+
   render() {
     return (
-      <ChanelWrapper
-        bacgroundColor={this.props.backgroundColor}
-        onClick={this.clickHandler}
-      >
-        ChanelsWindow заготовка
-      </ChanelWrapper>
+      <DynamicModuleLoader modules={[getCahnelsWindowModule()]}>
+        <ChanelWrapper
+          bacgroundColor={this.props.backgroundColor}
+          onClick={this.clickHandler}
+        >
+          ChanelsWindow заготовка
+        </ChanelWrapper>
+      </DynamicModuleLoader>
     );
   }
 }

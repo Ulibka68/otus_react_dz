@@ -1,11 +1,15 @@
-import {combineReducers} from "redux";
+import { combineReducers } from "redux";
 
 // createStore allows us to load/unload modules dynamically.
-import { createStore as createStoreReduxDynModules, IExtension, IModule } from "redux-dynamic-modules";
+import {
+  createStore as createStoreReduxDynModules,
+  IExtension,
+  IModule,
+} from "redux-dynamic-modules";
 // Saga extension allows us to use Saga middleware in the module store.
 import { getSagaExtension } from "redux-dynamic-modules-saga";
 // Thunk extension allows us to use Thunk middleware in the module store.
-// import { getThunkExtension } from "redux-dynamic-modules-thunk";
+import { getThunkExtension } from "redux-dynamic-modules-thunk";
 
 // импорты из моих модулей
 import { lifeStateSlice } from "@/modules/Life";
@@ -29,20 +33,19 @@ const reducer = combineReducers({
   chanelWindowState: chanelWindowSlice.reducer,
 });
 
-
 export function getLoggingExtension(): IExtension {
   return {
     onModuleAdded: (module: IModule<any>) =>
-        console.log(`Module ${module.id} added`),
+      console.log(`Module ${module.id} added`),
     onModuleRemoved: (module: IModule<any>) =>
-        console.log(`Module ${module.id} removed`),
+      console.log(`Module ${module.id} removed`),
   };
 }
 
 export type LifeGameRootState = ReturnType<typeof reducer>;
 
 export const store = createStoreReduxDynModules<LifeGameRootState>({
-  extensions: [getSagaExtension(),getLoggingExtension()],
+  extensions: [getSagaExtension(), getThunkExtension(), getLoggingExtension()],
 });
 
 /*
@@ -54,4 +57,3 @@ export const store = createStore<TicTacToeGameState>(
 );
 
  */
-
