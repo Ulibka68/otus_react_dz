@@ -34,8 +34,8 @@ class ChanelsWindowClass extends React.Component<Props, any> {
 }
 
 const connector = connect((state: LifeGameRootState) => {
+  //  так делать нельзя но почему то state.chanelWindowState === undefined на начальном этапе
   if (!state.chanelWindowState) {
-    //  так делать нельзя почему то state.chanelWindowState === undefined на начальном этапе
     state.chanelWindowState = cInitialState;
   }
 
