@@ -7,9 +7,11 @@ import * as life from "@/modules/Life/state_logic_reducer";
 import { ChanelsWindow } from "@/modules/ChanelWindow/chanelsWindow";
 
 /* Провести начальную инициализацию жизни  */
+/*
 store.dispatch(life.initState({ sizex: 10, sizey: 10 }));
 store.dispatch(life.randomSeed({ seedPercent: 0.3 }));
 store.dispatch(life.caclNeighbors(null));
+*/
 
 export const App: React.FC<{}> = () => (
   <Provider store={store}>
@@ -20,10 +22,12 @@ export const App: React.FC<{}> = () => (
             <Link to="/">Начало</Link>
           </li>
           <li>
-            <Link to="/gamespace">Поле для игры тестовое</Link>
+            <Link to="/gamespace">не работает: Поле для игры тестовое</Link>
           </li>
           <li>
-            <Link to="/chanelsWindow">SAGA Chanels</Link>
+            <Link to="/chanelsWindow">
+              работает: Window глобальный клик вне прямоугольника
+            </Link>
           </li>
         </ul>
       </nav>
