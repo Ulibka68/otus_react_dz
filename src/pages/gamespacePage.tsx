@@ -3,7 +3,7 @@ import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import { connect, ConnectedProps } from "react-redux";
 import { LifeGameRootState } from "@/redux/store";
-import * as life from "@/modules/Life/state_logic_reducer";
+import * as life from "@/modules/Life/lifeReducer";
 
 const FlexWrapper = styled.div`
   display: flex;

@@ -13,23 +13,15 @@ import { getThunkExtension } from "redux-dynamic-modules-thunk";
 
 // импорты из моих модулей
 import { lifeStateSlice } from "@/modules/Life";
-import { chanelWindowSlice } from "@/modules/ChanelWindow/chanelsWindowReducer";
+import * as life from "@/modules/Life";
 
-/* постоянно действующая saga не нужна - так как на каждом экране запускается своя сага
-function* rootSaga() {
-  yield fork(lifeSaga);
-  yield fork(GlobalWindowClickSaga);
-
-  while (true) {
-    const event = yield take(life_reducer.startTimer.type);
-    yield fork(timerChannelsSaga);
-  }
-}
-
- */
+import {
+  chanelWindowSlice,
+  cInitialState,
+} from "@/modules/ChanelWindow/chanelsWindowReducer";
 
 const reducer = combineReducers({
-  lifeState: lifeStateSlice.reducer,
+  lifeState: life.reducer,
   chanelWindowState: chanelWindowSlice.reducer,
 });
 
@@ -45,6 +37,10 @@ export function getLoggingExtension(): IExtension {
 export type LifeGameRootState = ReturnType<typeof reducer>;
 
 export const store = createStoreReduxDynModules<LifeGameRootState>({
+  initialState: {
+    chanelWindowState: cInitialState,
+    lifeState: life.defaultlifeState,
+  },
   extensions: [getSagaExtension(), getThunkExtension(), getLoggingExtension()],
 });
 

@@ -29,19 +29,12 @@ export const chanelWindowSlice = createSlice({
         state.curColorIndex = 0;
       state.backgroundColor = state.colorMaps[state.curColorIndex];
     },
-    InitWindowState(state, action: PayloadAction<void>) {
-      state = { ...cInitialState };
-    },
   },
 });
 
 // export const { reducer, actions } = lifeStateSlice;
 export const { reducer } = chanelWindowSlice;
-export const {
-  changeBgColor,
-  nextColor,
-  InitWindowState,
-} = chanelWindowSlice.actions;
+export const { changeBgColor, nextColor } = chanelWindowSlice.actions;
 
 export const cnahelWindow_STOP_SAGA = createAction<void>(
   "cnahelWindow/STOP_SAGA"

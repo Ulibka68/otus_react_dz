@@ -1,50 +1,61 @@
-import { reducer } from "./chanelsWindowReducer";
-import { GlobalWindowClickSaga } from "./chanelsWindowSaga";
 import {
-  cnahelWindow_STOP_SAGA,
-  cnahelWindow_START_SAGA,
-} from "@/modules/ChanelWindow/chanelsWindowReducer";
+  reducer,
+  initState,
+  randomSeed,
+  startTimer,
+  stopTimer,
+  caclNeighbors,
+  life_START_SAGA,
+  life_STOP_SAGA,
+} from "./lifeReducer";
+// import * as lifeReducer from "./lifeReducer";
+import * as lifeSaga from "./life_saga";
 
 import { Dispatch } from "@reduxjs/toolkit";
 import { AnyAction } from "redux";
 import { ISagaModule } from "redux-dynamic-modules-saga";
 
-type TchanelWindowState = ReturnType<typeof reducer>;
-type getStateType = () => TchanelWindowState;
+type TlifeState = ReturnType<typeof reducer>;
+type getStateType = () => TlifeState;
 
-function cancelWindowSaga() {
+function cancelLifeSaga() {
   return (dispatch: Dispatch, getState: getStateType) => {
-    dispatch(cnahelWindow_STOP_SAGA());
+    dispatch(life_STOP_SAGA());
   };
 }
 
 // return (dispatch: thunk.ThunkDispatch<any, any, any>, getState: any) => {
-function startWindowSaga() {
+function startLifeSaga() {
   return (dispatch: Dispatch, getState: getStateType) => {
-    dispatch(cnahelWindow_START_SAGA());
+    /* Провести начальную инициализацию жизни  */
+    dispatch(initState({ sizex: 10, sizey: 10 }));
+    dispatch(randomSeed({ seedPercent: 0.3 }));
+    dispatch(caclNeighbors(null));
+
+    dispatch(life_START_SAGA());
   };
 }
 
 // any - тип локального state
-export function getCahnelsWindowModule(): ISagaModule<typeof reducer> {
+export function getLifeModule(): ISagaModule<typeof reducer> {
   return {
     // Unique id of the module
-    id: "chanelsWindow",
+    id: "life",
     // Maps the Store key to the reducer
     reducerMap: {
-      chanelWindowState: reducer,
+      lifeState: reducer,
     },
     // если Saga с параметром - то пишется так:
     // { saga: usersSagaWithArguments, argument: { a: "argument" } },
-    sagas: [GlobalWindowClickSaga],
+    sagas: [lifeSaga.lifeSaga],
     // Optional: Any actions to dispatch when the module is loaded
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    initialActions: [startWindowSaga() as AnyAction],
+    initialActions: [startLifeSaga()],
     // Optional: Any actions to dispatch when the module is unloaded
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    finalActions: [cancelWindowSaga()],
+    finalActions: [cancelLifeSaga()],
   };
 }
 

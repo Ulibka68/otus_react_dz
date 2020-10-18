@@ -1,24 +1,9 @@
 import { takeEvery, call, put, fork, race, take } from "redux-saga/effects";
 import { eventChannel, END } from "redux-saga";
 
-import { nextState, stopTimer } from "./state_logic_reducer";
-
-function* tesSagaJob() {
-  console.error("Hello Sagas!");
-  yield takeEvery("LIFE_NEXT_STATE_ASYNC", nextLifeStateAsync);
-}
-
-export function* lifeSaga() {
-  yield fork(tesSagaJob);
-}
+import { nextState, stopTimer } from "./lifeReducer";
 
 const delay = (ms: number) => new Promise<void>((res) => setTimeout(res, ms));
-
-// обновить состояние с задержкой 1 сек
-export function* nextLifeStateAsync() {
-  yield call(delay, 1000);
-  yield put(nextState(null));
-}
 
 function timerChannels(sec: number) {
   return eventChannel((emitter) => {
