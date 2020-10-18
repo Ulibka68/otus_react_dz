@@ -3,7 +3,8 @@ import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import { connect, ConnectedProps } from "react-redux";
 import { LifeGameRootState } from "@/redux/store";
-import * as life from "@/modules/Life/lifeReducer";
+// import * as life from "@/modules/Life/lifeReducer";
+import * as life from "@/modules/Life";
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const Btn = styled.button`
 `;
 
 import { GameSpace } from "@/modules/Life/gameSpace";
+import { DynamicModuleLoader } from "redux-dynamic-modules";
 
 class GameSpacePageClass extends React.Component<Props> {
   calcNextState = () => {
@@ -36,16 +38,18 @@ class GameSpacePageClass extends React.Component<Props> {
 
   render() {
     return (
-      <div>
-        <FlexWrapper>
-          <GameSpace cellSize={20} showNeighbors={false} />
-          <GameSpace cellSize={20} showNeighbors={true} />
-        </FlexWrapper>
+      <DynamicModuleLoader modules={[life.getLifeModule()]}>
+        <div>
+          <FlexWrapper>
+            <GameSpace cellSize={20} showNeighbors={false} />
+            <GameSpace cellSize={20} showNeighbors={true} />
+          </FlexWrapper>
 
-        <Btn onClick={this.calcNextState}>Следующее состояние</Btn>
-        <Btn onClick={this.startTimerSaga}>Запустить таймер</Btn>
-        <Btn onClick={this.stopTimerSaga}>Остановить таймер</Btn>
-      </div>
+          <Btn onClick={this.calcNextState}>Следующее состояние</Btn>
+          <Btn onClick={this.startTimerSaga}>Запустить таймер</Btn>
+          <Btn onClick={this.stopTimerSaga}>Остановить таймер</Btn>
+        </div>
+      </DynamicModuleLoader>
     );
   }
 }

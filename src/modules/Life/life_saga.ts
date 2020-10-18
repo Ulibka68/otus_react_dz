@@ -1,9 +1,10 @@
 import { takeEvery, call, put, fork, race, take } from "redux-saga/effects";
 import { eventChannel, END } from "redux-saga";
 
-import { nextState, stopTimer } from "./lifeReducer";
+import { nextState, stopTimer, startTimer } from "./lifeReducer";
+import { Channel } from "@redux-saga/types";
 
-const delay = (ms: number) => new Promise<void>((res) => setTimeout(res, ms));
+let chanel: Channel<any> | null = null;
 
 function timerChannels(sec: number) {
   return eventChannel((emitter) => {
@@ -11,7 +12,7 @@ function timerChannels(sec: number) {
     const timerId = setInterval(() => {
       console.log("timer : ", ++cnt);
       emitter(cnt);
-    }, sec * 1000);
+    }, sec * 500);
     // The subscriber must return an unsubscribe function
     return () => {
       clearInterval(timerId);
@@ -20,22 +21,24 @@ function timerChannels(sec: number) {
 }
 
 export function* timerChannelsSaga() {
-  const chanel = yield call(timerChannels, 2);
+  if (chanel) return; // saga уже запущена и работает
+  chanel = yield call(timerChannels, 2);
 
   while (true) {
-    // const event = yield take([chanel, stopTimer.type]);
-
-    const event = yield race({
-      chanelE: take(chanel),
-      stopTimerE: take(stopTimer.type),
-    });
-
+    const event = yield take(chanel!);
     console.log("timerChannelsSaga event :", event);
-
-    if (event.stopTimerE) {
-      chanel.close(); // по идее сага должна убиться
-    } else {
-      yield put(nextState(null));
-    }
+    yield put(nextState(null));
   }
+}
+
+function* closeTimerChannelsSaga() {
+  if (chanel) {
+    chanel.close();
+    chanel = null;
+  }
+}
+
+export function* initSaga() {
+  yield takeEvery(startTimer.type, timerChannelsSaga);
+  yield takeEvery(stopTimer.type, closeTimerChannelsSaga);
 }
