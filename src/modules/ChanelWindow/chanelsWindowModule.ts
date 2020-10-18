@@ -38,15 +38,8 @@ export function getCahnelsWindowModule(): ISagaModule<typeof reducer> {
     // { saga: usersSagaWithArguments, argument: { a: "argument" } },
     sagas: [GlobalWindowClickSaga],
     // Optional: Any actions to dispatch when the module is loaded
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    initialActions: [startWindowSaga() as AnyAction],
+    initialActions: [(startWindowSaga() as unknown) as AnyAction],
     // Optional: Any actions to dispatch when the module is unloaded
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    finalActions: [cancelWindowSaga()],
+    finalActions: [(cancelWindowSaga() as unknown) as AnyAction],
   };
 }
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
