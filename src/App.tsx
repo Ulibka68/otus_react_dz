@@ -15,11 +15,11 @@ export const App: React.FC<{}> = () => (
             <Link to="/">Начало</Link>
           </li>
           <li>
-            <Link to="/gamespace">не работает: Поле для игры тестовое</Link>
+            <Link to="/gamespace">Поле для игры жизнь тестовое</Link>
           </li>
           <li>
             <Link to="/chanelsWindow">
-              работает: Window глобальный клик вне прямоугольника
+              Window глобальный клик вне прямоугольника
             </Link>
           </li>
         </ul>

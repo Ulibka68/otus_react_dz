@@ -149,8 +149,6 @@ export const lifeStateSlice = createSlice<
 
 export const stopTimer = createAction<void>("lifeState/STOP_TIMER");
 export const startTimer = createAction<void>("lifeState/START_TIMER");
-export const life_STOP_SAGA = createAction<void>("lifeState/STOP_SAGA");
-export const life_START_SAGA = createAction<void>("lifeState/START_SAGA");
 
 // export const { reducer, actions } = lifeStateSlice;
 export const { reducer } = lifeStateSlice;

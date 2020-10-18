@@ -1,12 +1,11 @@
 export { GameSpace } from "./gameSpace";
-export { timerChannelsSaga } from "./life_saga";
+export { timerChannelsSaga, initSaga } from "./life_saga";
+export { getLifeModule } from "./lifeModule";
 export {
   lifeStateSlice,
   defaultlifeState,
   stopTimer,
   startTimer,
-  life_STOP_SAGA,
-  life_START_SAGA,
   reducer,
   nextState,
   caclNeighbors,

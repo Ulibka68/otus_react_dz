@@ -5,14 +5,11 @@ import {
   startTimer,
   stopTimer,
   caclNeighbors,
-  life_START_SAGA,
-  life_STOP_SAGA,
 } from "./lifeReducer";
 // import * as lifeReducer from "./lifeReducer";
 import * as lifeSaga from "./life_saga";
 
 import { Dispatch } from "@reduxjs/toolkit";
-import { AnyAction } from "redux";
 import { ISagaModule } from "redux-dynamic-modules-saga";
 
 type TlifeState = ReturnType<typeof reducer>;
@@ -20,7 +17,8 @@ type getStateType = () => TlifeState;
 
 function cancelLifeSaga() {
   return (dispatch: Dispatch, getState: getStateType) => {
-    dispatch(life_STOP_SAGA());
+    // нужно остановить таймер если он запущен
+    dispatch(stopTimer());
   };
 }
 
@@ -31,8 +29,6 @@ function startLifeSaga() {
     dispatch(initState({ sizex: 10, sizey: 10 }));
     dispatch(randomSeed({ seedPercent: 0.3 }));
     dispatch(caclNeighbors(null));
-
-    dispatch(life_START_SAGA());
   };
 }
 
@@ -47,7 +43,7 @@ export function getLifeModule(): ISagaModule<typeof reducer> {
     },
     // если Saga с параметром - то пишется так:
     // { saga: usersSagaWithArguments, argument: { a: "argument" } },
-    sagas: [lifeSaga.lifeSaga],
+    sagas: [lifeSaga.initSaga],
     // Optional: Any actions to dispatch when the module is loaded
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
