@@ -33,17 +33,11 @@ class ChanelsWindowClass extends React.Component<Props, any> {
   }
 }
 
-const connector = connect((state: LifeGameRootState) => {
-  /*
-  //  так делать нельзя но почему то state.chanelWindowState === undefined на начальном этапе
-  if (!state.chanelWindowState) {
-    state.chanelWindowState = cInitialState;
+const connector = connect(
+  ({ chanelWindowState = cInitialState }: LifeGameRootState) => {
+    return chanelWindowState;
   }
-
-   */
-
-  return state.chanelWindowState;
-});
+);
 
 // The inferred type will look like:
 type PropsFromRedux = ConnectedProps<typeof connector>;

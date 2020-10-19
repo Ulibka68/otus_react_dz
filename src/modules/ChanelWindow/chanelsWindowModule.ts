@@ -22,8 +22,7 @@ function cancelWindowSaga() {
 // return (dispatch: thunk.ThunkDispatch<any, any, any>, getState: any) => {
 function startWindowSaga() {
   return (dispatch: Dispatch, getState: getStateType) => {
-    // dispatch(initState());
-    console.warn("startWindowSaga : ", getState());
+    // console.warn("startWindowSaga : ", getState());
     dispatch(cnahelWindow_START_SAGA());
   };
 }
