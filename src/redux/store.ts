@@ -37,13 +37,13 @@ export function getLoggingExtension(): IExtension {
 export type LifeGameRootState = ReturnType<typeof reducer>;
 
 export const store = createStoreReduxDynModules<LifeGameRootState>({
-  initialState: {
-    chanelWindowState: cInitialState,
-    lifeState: life.defaultlifeState,
-  },
+  // initialState: {
+  //   chanelWindowState: cInitialState,
+  //   lifeState: life.defaultlifeState,
+  // },
   extensions: [getSagaExtension(), getThunkExtension(), getLoggingExtension()],
 });
-
+console.warn("store:", store.getState());
 /*
 Можно добавитиь несколько неубиваемых саг (на примере курса)
 export const store = createStore<TicTacToeGameState>(

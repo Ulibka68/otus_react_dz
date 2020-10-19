@@ -3,6 +3,7 @@ import { GlobalWindowClickSaga } from "./chanelsWindowSaga";
 import {
   cnahelWindow_STOP_SAGA,
   cnahelWindow_START_SAGA,
+  initState,
 } from "@/modules/ChanelWindow/chanelsWindowReducer";
 
 import { Dispatch } from "@reduxjs/toolkit";
@@ -21,6 +22,8 @@ function cancelWindowSaga() {
 // return (dispatch: thunk.ThunkDispatch<any, any, any>, getState: any) => {
 function startWindowSaga() {
   return (dispatch: Dispatch, getState: getStateType) => {
+    // dispatch(initState());
+    console.warn("startWindowSaga : ", getState());
     dispatch(cnahelWindow_START_SAGA());
   };
 }
@@ -41,5 +44,6 @@ export function getCahnelsWindowModule(): ISagaModule<typeof reducer> {
     initialActions: [(startWindowSaga() as unknown) as AnyAction],
     // Optional: Any actions to dispatch when the module is unloaded
     finalActions: [(cancelWindowSaga() as unknown) as AnyAction],
+    // retained: true,
   };
 }
