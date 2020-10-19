@@ -3,7 +3,6 @@ import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import { connect, ConnectedProps } from "react-redux";
 import { LifeGameRootState } from "@/redux/store";
-// import * as life from "@/modules/Life/lifeReducer";
 import * as life from "@/modules/Life";
 
 const FlexWrapper = styled.div`
@@ -54,12 +53,16 @@ class GameSpacePageClass extends React.Component<Props> {
   }
 }
 
-const connector = connect((state: LifeGameRootState) => state.lifeState, {
-  caclNeighbors: life.caclNeighbors,
-  nextState: life.nextState,
-  stopTimer: life.stopTimer,
-  startTimer: life.startTimer,
-});
+const connector = connect(
+  ({ lifeState = life.defaultlifeState }: LifeGameRootState) => lifeState,
+
+  {
+    caclNeighbors: life.caclNeighbors,
+    nextState: life.nextState,
+    stopTimer: life.stopTimer,
+    startTimer: life.startTimer,
+  }
+);
 
 // The inferred type will look like:
 type PropsFromRedux = ConnectedProps<typeof connector>;

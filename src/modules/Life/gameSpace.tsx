@@ -57,7 +57,12 @@ const GameSpaceFC: React.FC<Props> = ({
   );
 };
 
-const connector = connect((state: LifeGameRootState) => state.lifeState);
+const connector = connect(
+  ({ lifeState = life.defaultlifeState }: LifeGameRootState) => {
+    console.log(lifeState);
+    return lifeState;
+  }
+);
 
 // The inferred type will look like:
 type PropsFromRedux = ConnectedProps<typeof connector>;

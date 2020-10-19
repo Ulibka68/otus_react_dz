@@ -43,7 +43,7 @@ export const store = createStoreReduxDynModules<LifeGameRootState>({
   // },
   extensions: [getSagaExtension(), getThunkExtension(), getLoggingExtension()],
 });
-console.warn("store:", store.getState());
+// console.warn("store:", store.getState());
 /*
 Можно добавитиь несколько неубиваемых саг (на примере курса)
 export const store = createStore<TicTacToeGameState>(
