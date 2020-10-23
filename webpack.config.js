@@ -29,7 +29,16 @@ module.exports = {
     ],
   },
   devServer: {
+    hot: true,
+    // contentBase: path.join(__dirname, 'src/assets'),
+    // contentBasePublicPath: '/',
     historyApiFallback: true,
+    // historyApiFallback: {
+    //   rewrites: [
+    //     {from: /favicon.ico$/, to: 'E:/_prgs/otus/redux-dynamic-modules/packages/widgets-example/src/assets/favicon.ico'},
+    //     {from: /manifest.json$/, to: 'E:/_prgs/otus/redux-dynamic-modules/packages/widgets-example/src/assets/manifest.json'}
+    //   ]
+    // }
   },
   plugins: [
     new HtmlWebpackPlugin({
