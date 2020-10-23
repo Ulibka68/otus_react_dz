@@ -27,7 +27,7 @@ export function* GlobalWindowClickSaga() {
 
   function* stopSaga() {
     if (chanel) {
-      put(chanel!, END);
+      yield chanel.close();
     }
   }
 

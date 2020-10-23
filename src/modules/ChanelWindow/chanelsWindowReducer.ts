@@ -35,7 +35,6 @@ export const chanelWindowSlice = createSlice({
   },
 });
 
-// export const { reducer, actions } = lifeStateSlice;
 export const { reducer } = chanelWindowSlice;
 export const {
   initState,
