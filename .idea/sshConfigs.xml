@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="45.67.58.113" id="687e9703-fe2a-4149-a2f5-657984f3cb40" port="22" customName="Beget NodeJS" nameFormat="CUSTOM" username="root">
+        <option name="customName" value="Beget NodeJS" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

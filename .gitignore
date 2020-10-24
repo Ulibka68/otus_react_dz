@@ -1,11 +1,3 @@
-.history
-.vscode
 node_modules
-**/node_modules
-dist
-storybook-static
-.idea/*
-.idea
-#src/**/*.js
-src/**/*.map
-
+.DS_Store
+.env
