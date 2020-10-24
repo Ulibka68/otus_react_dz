@@ -8,4 +8,6 @@ storybook-static
 .idea
 src/**/*.js
 src/**/*.map
+**/.next
+
 
